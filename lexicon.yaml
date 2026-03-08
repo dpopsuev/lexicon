@@ -1,5 +1,5 @@
-name: org-lexicon
-description: Organization-wide rules, skills, and templates
+name: dpopsuev-lexicon
+description: Daniel's personal rules, skills, and templates
 version: "0.2.0"
 
 defaults:
