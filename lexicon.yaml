@@ -1,0 +1,16 @@
+name: org-lexicon
+description: Organization-wide rules, skills, and templates
+version: "0.2.0"
+
+defaults:
+  priority: 25
+
+routing:
+  - match: { labels: [testing, tdd] }
+    globs: ["**/*_test.*"]
+  - match: { labels: [security, owasp] }
+    always_apply: true
+  - match: { labels: [process] }
+    always_apply: true
+  - match: { labels: [architecture] }
+    always_apply: true
