@@ -10,7 +10,13 @@ routing:
     globs: ["**/*_test.*"]
   - match: { labels: [security, owasp] }
     always_apply: true
+  - match: { labels: [security, hygiene] }
+    always_apply: true
   - match: { labels: [process] }
     always_apply: true
+  - match: { labels: [process, agentic] }
+    always_apply: true
   - match: { labels: [architecture] }
+    always_apply: true
+  - match: { labels: [conventions, output] }
     always_apply: true

@@ -34,17 +34,23 @@ Capture the intended behavior or reproduce the bug. Run it. It **must fail**. If
 
 Before implementing the fix, add logging and instrumentation that surfaces **failures, errors, and anomalies**. Orange output answers: *"What went wrong? Where? Why?"*
 
+Use structured logging fields for machine-readability (e.g., case IDs, step names, error codes as distinct fields, not interpolated into message strings).
+
 ### 3. Green -- make the test pass
 
 Implement the minimal production code to pass the Red test. Run the full affected test suite. Everything must be green.
+
+If the change touches a circuit or pipeline, run stub calibration before declaring green.
 
 ### 4. Yellow -- instrument success signals
 
 With the code working, add logging that surfaces **healthy operation and key decisions**. Yellow output answers: *"What happened? What did we choose? How long did it take?"*
 
+Use structured fields for latency, throughput, and decision metadata (same principle as Orange).
+
 ### 5. Blue -- refactor
 
-With tests green and full observability (Orange + Yellow) in place: remove duplication, improve naming, extract helpers. Review log levels.
+With tests green and full observability (Orange + Yellow) in place: remove duplication, improve naming, extract helpers. Review log levels. If the change touched AI inference, review and update prompts.
 
 ### Orange vs Yellow summary
 

@@ -28,3 +28,4 @@ Tied to a current consumer or use case. Layouts, artifact directories, file name
 1. **Core models** -- keep hierarchy and artifact concepts generic. Concrete layouts and metadata labels go in per-consumer sections.
 2. **Examples and defaults** -- state whether they are generic or scenario-specific. If scenario-specific, name the scenario and note that it may change.
 3. **Code** -- prefer generic interfaces. Bind domain-specific naming and layout via configuration or adapter pattern, not as the only supported shape.
+4. **Test output format** -- BDD structure (Given/When/Then) is universal; the serialization format (JSON, CSV, console) is a per-project tuning decision.

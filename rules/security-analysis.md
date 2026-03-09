@@ -28,6 +28,7 @@ Evaluate every feature, endpoint, data flow, and trust boundary against the OWAS
 
 - On any change touching a trust boundary or handling external data, scan this checklist and flag findings.
 - Document findings with severity: critical / high / medium / low / informational (CVSS-aligned).
+- File a security case per project template when a vulnerability or risk is identified.
 
 ## References
 
