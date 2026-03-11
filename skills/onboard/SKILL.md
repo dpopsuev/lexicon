@@ -16,7 +16,7 @@ Teach newcomers the repository's purpose, architecture, build/test flow, and saf
 3. **Architecture overview** -- list major packages/modules, their responsibilities, and key abstractions.
 4. **Build / test / run** -- provide the exact commands to build, test, and run the project.
 5. **Safe vs risky zones** -- identify areas safe for newcomers to modify vs areas requiring deeper knowledge.
-6. **Governance pointers** -- link to relevant rules, contracts, or planning artifacts if they exist.
+6. **Planning pointers** -- link to relevant rules, specs, or planning artifacts if they exist.
 
 ## Constraints
 

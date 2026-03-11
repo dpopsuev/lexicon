@@ -2,7 +2,7 @@
 id: off-the-shelf-modules
 title: Off-the-Shelf Module Policy
 description: Prefer mature, community-backed modules over bespoke implementations when justified
-labels: [dependencies, governance]
+labels: [dependencies, process]
 ---
 
 # Off-the-Shelf Module Policy
