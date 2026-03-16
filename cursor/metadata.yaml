@@ -1,0 +1,10 @@
+kind: adapter
+inherits: generic
+provider: cursor
+injection_model:
+  rules: ".cursor/rules/*.mdc files with YAML frontmatter"
+  skills: ".cursor/skills/*/SKILL.md directories"
+  always_apply: "frontmatter alwaysApply: true"
+  glob_routing: "frontmatter globs field"
+  bridge: "lex-bridge.mdc auto-loads at session start"
+  bootstrap: "Cursor auto-loads all .mdc files in .cursor/rules/"

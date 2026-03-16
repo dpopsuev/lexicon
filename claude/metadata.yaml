@@ -1,0 +1,10 @@
+kind: adapter
+inherits: generic
+provider: claude
+injection_model:
+  rules: "CLAUDE.md at project root + .claude/memory/ files"
+  skills: "/skill-name slash commands"
+  always_apply: "Listed in CLAUDE.md (auto-loaded)"
+  glob_routing: "Not native — use MCP resolve with context signals"
+  bridge: "MCP server instructions injected at session start"
+  bootstrap: "CLAUDE.md auto-loaded by Claude Code on session start"

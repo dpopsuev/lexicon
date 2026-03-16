@@ -1,7 +1,6 @@
 ---
 id: dev-flow
 title: Pre-Implementation Development Flow
-kind: template
 description: Structured flow before laying down code foundations
 labels: [process, planning]
 ---

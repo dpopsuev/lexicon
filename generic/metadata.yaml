@@ -1,0 +1,40 @@
+kind: source
+description: Provider-agnostic rules and skills — the source of truth
+rules:
+  - id: abstraction-boundaries
+    labels: [architecture]
+  - id: agentic-workflow
+    labels: [process, agentic]
+  - id: architecture-first-class
+    labels: [architecture, design]
+  - id: code-review
+    labels: [conventions]
+  - id: commit-conventions
+    labels: [conventions]
+  - id: data-structures-algorithms
+    labels: [performance, algorithms, data-structures]
+  - id: data-hygiene
+    labels: [security, hygiene]
+  - id: dev-flow
+    labels: [process]
+  - id: gherkin-specification
+    labels: [testing, tdd]
+  - id: hexagonal-architecture
+    labels: [architecture]
+  - id: human-readable-output
+    labels: [conventions, output]
+  - id: integrate-early
+    labels: [process]
+  - id: off-the-shelf-modules
+    labels: [architecture]
+  - id: papert-paradigm
+    labels: [process, agentic]
+  - id: performance-engineering
+    labels: [performance, engineering]
+  - id: security-analysis
+    labels: [security, owasp]
+  - id: testing-methodology
+    labels: [testing, tdd]
+skills:
+  - id: onboard
+  - id: ship-commits
