@@ -51,9 +51,14 @@ If none, write: "No trust boundaries affected."
 
 ## Execution Strategy
 
-How the work will be approached. Reference the integrate-early rule, TDD approach, etc.
+How the work will be approached. Reference the integrate-early rule, TDD approach, SOLID principles, etc.
 
-> {e.g., "Top-to-bottom. Interfaces first, contract tests second, stub implementations third, real internals last."}
+> {e.g., "Top-to-bottom. Interfaces first, contract tests second, stub implementations third, real internals last. SOLID check: no direct cross-module imports — all dependencies via sockets/interfaces."}
+
+**SOLID checkpoint** (verify before marking complete):
+- [ ] Single Responsibility — each changed module has one reason to change
+- [ ] Open/Closed — extension via sockets/registries, not modification of existing code
+- [ ] Dependency Inversion — no high-level module imports a low-level module directly
 
 ---
 
