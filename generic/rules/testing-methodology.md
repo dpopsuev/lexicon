@@ -59,6 +59,20 @@ With tests green and full observability (Orange + Yellow) in place: remove dupli
 | **Orange** | Problem / error / anomaly | `Warn`, `Error` | Before Green | *"What went wrong?"* |
 | **Yellow** | Success / decision / metric | `Info`, `Debug` | After Green | *"What happened? Are we healthy?"* |
 
+## Advanced testing techniques
+
+Beyond the coverage matrix, consider these techniques for higher-confidence verification:
+
+| Technique | What It Does | When to Apply |
+|-----------|-------------|---------------|
+| **Contract testing** | Consumer defines expected interface. Producer validates against it. Catches integration drift. | Any port/adapter boundary. MCP adapters must pass contract tests. |
+| **Property-based testing** | Define invariants. Framework generates random inputs to falsify them. Finds edge cases humans miss. | Parsers, serializers, state machines, any "for all inputs X, property Y holds." |
+| **Mutation testing** | Inject bugs into code. If tests still pass, the tests are too weak. Measures test quality itself. | After Green phase. Verify tests actually catch regressions. |
+| **Chaos engineering** | Intentionally break things. Verify the system recovers gracefully. | Pre-production. "What happens when adapter X goes down mid-operation?" |
+| **Fuzzing** | Feed malformed/random input to find crashes and security issues. | Trust boundaries. Parsers, deserializers, protocol handlers. |
+
+These are not required on every change. Apply when the coverage matrix indicates a gap or when the blast radius of failure is high (see `trust-boundaries` rule).
+
 ## Security as test
 
 Security tests prove the system **does not** exhibit harmful behavior. For every trust boundary touched:
