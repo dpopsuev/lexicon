@@ -97,6 +97,21 @@ Given/When/Then or structural invariants that prove the goal is met.
 
 ---
 
+## Operational Readiness
+
+If this task changes deployed behavior, verify before marking complete:
+
+- [ ] **SLIs defined** -- what metrics prove this change works in production?
+- [ ] **SLOs set** -- what are the acceptable thresholds?
+- [ ] **Alerting configured** -- who gets notified when SLOs breach?
+- [ ] **Rollback plan** -- can this change be undone in under 5 minutes?
+- [ ] **Canary strategy** -- how will you verify in production before full rollout?
+
+If not applicable: "Internal logic only -- no deployment impact."
+See `operational-quality` Lex rule for SRE principles.
+
+---
+
 ## Notes
 
 Running log of decisions, discoveries, and course corrections made during execution.

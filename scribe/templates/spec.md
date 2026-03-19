@@ -94,13 +94,35 @@ If no refactorings: "No smells addressed."
 
 ---
 
+## Blast Radius
+
+For each change area, state the worst-case impact if it fails. Size defenses proportionally.
+
+| Change Area | Blast Radius | Worst Case | Defense |
+|-------------|-------------|------------|---------|
+| {component} | small / medium / large | {what breaks if this fails} | {mitigation: test gate, canary, rollback, approval} |
+
+If all changes are internal with no deployment impact: "Internal logic only -- no blast radius beyond test suite."
+
+---
+
 ## Security Assessment
 
-OWASP spot-check for trust boundaries touched by this spec.
-If none, write: "No trust boundaries affected."
+**Step 1: Identify trust boundaries** touched by this spec. A trust boundary exists wherever data or control crosses between components with different privilege levels.
+
+**Step 2: STRIDE each boundary:**
+
+| Boundary | S (Spoofing) | T (Tampering) | R (Repudiation) | I (Info Disclosure) | D (DoS) | E (Elevation) |
+|----------|---|---|---|---|---|---|
+| {boundary description} | {finding or N/A} | | | | | |
+
+**Step 3: OWASP spot-check** for applicable categories:
 
 | OWASP | Finding | Mitigation |
 |-------|---------|------------|
+
+If no trust boundaries: "No trust boundaries affected."
+See `trust-boundaries` and `defense-in-depth` Lex rules.
 
 ---
 
