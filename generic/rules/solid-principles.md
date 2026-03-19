@@ -11,40 +11,55 @@ labels: [architecture, design, constraints]
 
 ## The Principles
 
-### S — Single Responsibility
-Each module/package has one reason to change. A schematic handles domain logic. A connector handles transport. A framework package handles orchestration. If a change requires editing both, the boundary is wrong.
+### S -- Single Responsibility
 
-### O — Open/Closed
-Modules are open for extension, closed for modification. New schematics don't require framework changes. New connectors don't require schematic changes. Extension happens via sockets, registries, and component.yaml — not by editing existing code.
+Each module has one reason to change. Describe its purpose in one sentence without "and." If a change requires editing two unrelated modules, the boundary is wrong.
 
-### L — Liskov Substitution
-Any implementation of an interface can replace another without breaking callers. `toolkit.SourceReader` works whether the driver is git, docs, or a test stub. `Dispatcher` works whether the backend is CLI, MCP, HTTP, or stdin.
+Litmus test: can you name the module's single axis of change? "Handles HTTP transport." "Validates user input." "Persists session state." If you need a comma, split.
 
-### I — Interface Segregation
-Consumers depend only on the interfaces they use. A calibration harness doesn't import RCA types. A connector doesn't import the circuit walker. If a consumer needs to import a package it doesn't directly use, the interface is too wide.
+### O -- Open/Closed
 
-### D — Dependency Inversion
-High-level modules must not depend on low-level modules. Both depend on abstractions.
+Modules are open for extension, closed for modification. New behavior is added by implementing an interface, registering a plugin, or passing configuration -- not by editing existing code.
 
-**Origami-specific constraint**: **A schematic must never import another schematic directly.** Cross-schematic dependencies are declared as sockets in `component.yaml` and wired by the consumer via `origami.yaml` bindings. The framework resolves the wiring at fold time.
+Litmus test: can you add a new variant (driver, handler, formatter) without modifying existing source files? If adding a feature requires a new `case` in an existing switch, the module is not closed.
+
+### L -- Liskov Substitution
+
+Any implementation of an interface can replace another without breaking callers. Subtypes must honor the contract: same preconditions, same postconditions, no surprises.
+
+Litmus test: do you have contract tests that run against every implementation of the same interface? If not, substitutability is assumed, not proven.
+
+### I -- Interface Segregation
+
+Consumers depend only on the interfaces they use. Prefer small interfaces (1-3 methods) over large ones. If a consumer imports a package only because the interface is too wide, split it.
+
+Litmus test: does any implementation leave methods as no-ops or panics? The interface is too wide.
+
+### D -- Dependency Inversion
+
+High-level modules must not depend on low-level modules. Both depend on abstractions. Domain logic defines the interfaces (ports). Infrastructure implements them (adapters). The dependency arrow always points inward.
+
+Litmus test: can you test the domain module with a stub adapter and no real infrastructure? If you need a database, network, or filesystem to test business logic, the dependency is inverted.
 
 ## What violates this rule
 
-- A schematic importing another schematic's Go package (e.g., `rh-rca` importing `rh-dsr` directly instead of via a socket).
-- A framework package importing a schematic package (e.g., `cmd/origami` importing `schematics/rca`).
-- A connector hardcoding domain types instead of implementing a socket interface.
-- A circuit YAML referencing another circuit by module path instead of by name (the registry resolves names → definitions).
+- A domain package importing an infrastructure package (database, HTTP client, filesystem).
+- An interface with 5+ methods that forces implementors to stub unused methods.
+- Adding a new feature by modifying an existing switch/conditional instead of adding an implementation.
+- Two modules that always change together for unrelated reasons (shared axis of change).
+- An implementation that silently ignores part of the interface contract (violates Liskov).
 
 ## What complies
 
-- Schematics declare sockets: `requires: sockets: [{name: dsr, type: Reader}]`
-- Consumers bind sockets: `origami.yaml: schematics.rca.bindings.dsr: harvester`
-- The framework wires it at fold time: `mcpconfig.WithDSRReader(rhdsrInstance)`
-- Sub-circuits are registered in `GraphRegistries.Circuits` by the consumer, not hardcoded by the schematic.
-- Framework utilities like `LoadSubCircuitsFromFS` accept resolvers as parameters — they don't know which schematics exist.
+- Domain defines interfaces. Adapters implement them. Wiring happens at the composition root (main, config, DI container).
+- New behavior added via new types implementing existing interfaces.
+- Contract tests run against every implementation of a shared interface.
+- Each module's purpose described in one sentence.
 
 ## Complements
 
-- `hexagonal-architecture` — domain logic in libraries, binaries are thin shells.
-- `abstraction-boundaries` — interfaces define module boundaries.
-- `testing-methodology` — SOLID code is testable code (no hidden dependencies).
+- `hexagonal-architecture` -- domain logic in libraries, binaries are thin shells.
+- `abstraction-boundaries` -- generic vs scenario-specific separation.
+- `testing-methodology` -- SOLID code is testable code (no hidden dependencies).
+- `design-patterns` -- patterns are often the mechanism for achieving SOLID.
+- `code-smells` -- smells frequently signal SOLID violations.

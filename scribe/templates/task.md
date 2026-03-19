@@ -56,9 +56,17 @@ How the work will be approached. Reference the integrate-early rule, TDD approac
 > {e.g., "Top-to-bottom. Interfaces first, contract tests second, stub implementations third, real internals last. SOLID check: no direct cross-module imports — all dependencies via sockets/interfaces."}
 
 **SOLID checkpoint** (verify before marking complete):
-- [ ] Single Responsibility — each changed module has one reason to change
-- [ ] Open/Closed — extension via sockets/registries, not modification of existing code
-- [ ] Dependency Inversion — no high-level module imports a low-level module directly
+- [ ] Single Responsibility -- each changed module has one reason to change
+- [ ] Open/Closed -- extension via interfaces/registries, not modification of existing code
+- [ ] Liskov Substitution -- implementations pass interface contract tests
+- [ ] Interface Segregation -- no interface exceeds 3 methods without justification
+- [ ] Dependency Inversion -- no high-level module imports a low-level module directly
+
+**Design review** (verify before marking complete):
+- [ ] Smell scan -- no new smells introduced (see `code-smells` rule)
+- [ ] Pattern check -- any pattern used is justified by a concrete problem, not speculative
+- [ ] One implementation = no interface -- interfaces have >=2 implementations or are at a module boundary
+- [ ] Dependency direction -- new imports flow inward (adapter -> domain), never outward
 
 ---
 

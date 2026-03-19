@@ -60,6 +60,40 @@ Concrete changes organized by component or concern. Each change has Gherkin acce
 
 ---
 
+## Dependency Direction
+
+Map each change area to the hexagonal layer it touches. Verify dependency arrows point inward (adapter -> port -> domain). Flag any outward dependency as a violation requiring justification.
+
+| Change Area | Layer | Depends On | Direction Valid? |
+|-------------|-------|-----------|-----------------|
+| {component} | domain / port / adapter / infra | {what it imports} | Yes / No (justify) |
+
+Layers (inward = allowed): `infra -> adapter -> port -> domain`
+
+If no structural changes: "No dependency changes."
+
+---
+
+## Pattern Rationale
+
+For each design pattern introduced or modified by this spec (see `design-patterns` rule):
+
+| Pattern | Where | Problem It Solves | Alternative Considered |
+|---------|-------|-------------------|----------------------|
+| {name} | {module/component} | {why this pattern?} | {what you'd do without it} |
+
+If no patterns: "Straight-line code -- no patterns needed."
+
+Smell-driven refactorings (see `code-smells` rule), if applicable:
+
+| Smell Detected | Location | Refactoring Applied | Resulting Pattern |
+|----------------|----------|--------------------|--------------------|
+| {smell} | {module} | {technique} | {pattern or "none"} |
+
+If no refactorings: "No smells addressed."
+
+---
+
 ## Security Assessment
 
 OWASP spot-check for trust boundaries touched by this spec.
