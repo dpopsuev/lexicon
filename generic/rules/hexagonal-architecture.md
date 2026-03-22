@@ -36,5 +36,6 @@ labels: [architecture, design]
 
 ## Complements
 
+- `for-humans` -- hexagonal governs internal structure; for-humans governs the external surface users touch. Both apply simultaneously.
 - `integrate-early` -- can't integrate early if logic is locked inside a binary.
 - `testing-methodology` -- unit tests require importable functions, not subprocesses.
