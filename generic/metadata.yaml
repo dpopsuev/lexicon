@@ -72,6 +72,8 @@ rules:
     labels: [tools, mcp, architecture]
   - id: scribe-workflow
     labels: [tools, mcp, process]
+  - id: tubus-workflow
+    labels: [tools, mcp]
 skills:
   - id: onboard
   - id: ship-commits
