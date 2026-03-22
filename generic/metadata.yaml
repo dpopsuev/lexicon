@@ -27,6 +27,8 @@ rules:
     labels: [process]
   - id: factory-principles
     labels: [architecture, process]
+  - id: for-humans
+    labels: [design, architecture, process]
   - id: gherkin-specification
     labels: [testing, tdd]
   - id: go-best-practices
