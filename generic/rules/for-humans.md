@@ -11,6 +11,21 @@ Technology should serve human nature, not fight against it. Design from human me
 
 Based on Kenneth Reitz's "for humans" philosophy from the Python Requests library.
 
+## Relationship to hexagonal architecture
+
+This rule is the external complement to Cockburn's hexagonal architecture. Hexagonal governs the *internal* structure — ports, adapters, domain purity, dependency direction. "For humans" governs the *external* surface — what users and agents actually touch.
+
+```
+Internal (hexagonal)          External (for humans)
+─────────────────────         ─────────────────────
+Ports & adapters              CLI flags & output
+Domain isolation              Error messages
+Dependency inversion          API naming
+Interface segregation         Config format
+```
+
+The hexagon keeps the code clean. The surface keeps it humane. A system can have perfect internal architecture and still be hostile to use. Both rules apply simultaneously — never trade one for the other.
+
 ## Principles
 
 ### 1. Human-first interfaces
