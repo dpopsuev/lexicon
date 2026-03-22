@@ -2,7 +2,7 @@
 id: scribe-workflow
 title: Scribe Workflow
 description: How AI agents use Scribe MCP for goal tracking, artifact lifecycle, and cross-scope awareness
-labels: [process, agentic]
+labels: [tools, mcp, process]
 ---
 
 # Scribe Workflow

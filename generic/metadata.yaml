@@ -9,16 +9,28 @@ rules:
     labels: [architecture, design]
   - id: code-review
     labels: [conventions]
+  - id: code-smells
+    labels: [architecture, design, refactoring]
   - id: commit-conventions
     labels: [conventions]
-  - id: data-structures-algorithms
-    labels: [performance, algorithms, data-structures]
+  - id: coordination-as-code
+    labels: [architecture, process]
   - id: data-hygiene
     labels: [security, hygiene]
+  - id: data-structures-algorithms
+    labels: [performance, algorithms, data-structures]
+  - id: defense-in-depth
+    labels: [security, architecture]
+  - id: design-patterns
+    labels: [architecture, design]
   - id: dev-flow
     labels: [process]
+  - id: factory-principles
+    labels: [architecture, process]
   - id: gherkin-specification
     labels: [testing, tdd]
+  - id: go-best-practices
+    labels: [go, code-hygiene]
   - id: hexagonal-architecture
     labels: [architecture]
   - id: human-readable-output
@@ -27,14 +39,37 @@ rules:
     labels: [process]
   - id: off-the-shelf-modules
     labels: [architecture]
+  - id: operational-quality
+    labels: [architecture, process]
   - id: papert-paradigm
     labels: [process, agentic]
   - id: performance-engineering
     labels: [performance, engineering]
   - id: security-analysis
     labels: [security, owasp]
+  - id: solid-principles
+    labels: [architecture, design]
+  - id: stack-light
+    labels: [architecture, process]
   - id: testing-methodology
     labels: [testing, tdd]
+  - id: trust-boundaries
+    labels: [security, architecture]
+  # MCP tool workflows
+  - id: asterisk-workflow
+    labels: [tools, mcp]
+  - id: emcee-workflow
+    labels: [tools, mcp]
+  - id: lex-workflow
+    labels: [tools, mcp]
+  - id: limes-workflow
+    labels: [tools, mcp, testing]
+  - id: locus-usage
+    labels: [tools, mcp, architecture]
+  - id: locus-workflow
+    labels: [tools, mcp, architecture]
+  - id: scribe-workflow
+    labels: [tools, mcp, process]
 skills:
   - id: onboard
   - id: ship-commits

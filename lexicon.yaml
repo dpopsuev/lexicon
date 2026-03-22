@@ -1,6 +1,6 @@
 name: dpopsuev-lexicon
-description: Daniel's personal rules, skills, and templates
-version: "0.2.0"
+description: Daniel's personal rules, skills, templates, and MCP workflows
+version: "0.3.0"
 
 defaults:
   priority: 25
@@ -19,4 +19,6 @@ routing:
   - match: { labels: [architecture] }
     always_apply: true
   - match: { labels: [conventions, output] }
+    always_apply: true
+  - match: { labels: [tools, mcp] }
     always_apply: true

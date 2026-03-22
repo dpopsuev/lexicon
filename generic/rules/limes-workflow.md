@@ -2,7 +2,7 @@
 id: limes-workflow
 title: Limes CI Workflow
 description: How AI agents use Limes MCP for CI health monitoring, test execution, and regression detection
-labels: [process, agentic, testing]
+labels: [tools, mcp, testing]
 ---
 
 # Limes CI Workflow
