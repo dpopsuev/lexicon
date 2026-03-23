@@ -1,7 +1,7 @@
 ---
 id: defense-in-depth
 title: Defense in Depth
-description: Layer defenses so no single failure compromises the system. Swiss Cheese model, Safety-I/II, and the quality membrane.
+description: Layer defenses so no single failure compromises the system. Swiss Cheese model, Belt & Suspenders, Safety-I/II, and the quality membrane.
 labels: [security, architecture]
 ---
 
@@ -26,6 +26,25 @@ Applied to the DevOps loop:
 | React (auto-remediate) | Known failure patterns | Unknown unknowns |
 
 No single layer is the "security layer" or the "quality layer." Security and quality are the membrane around all layers.
+
+## Belt & Suspenders (Redundant Independence)
+
+Swiss Cheese stacks **heterogeneous** layers that catch different failure classes. Belt & Suspenders uses **redundant** mechanisms for the **same** goal — either one alone is sufficient, but together they eliminate the single point of failure.
+
+| Strategy | Layers are... | Failure coverage | Example |
+|----------|--------------|-----------------|---------|
+| **Swiss Cheese** | Complementary | Each catches what others miss | Sandbox + linter + tests + canary |
+| **Belt & Suspenders** | Redundant | Both catch the same thing independently | Physical isolation (namespace) + logical isolation (policy gate) |
+
+When to apply Belt & Suspenders:
+
+- **High blast radius** — if failure means data breach, production outage, or safety incident
+- **Independent failure modes** — the two mechanisms must fail for different reasons (same vendor, same library = not independent)
+- **Critical trust boundaries** — where the cost of breach far exceeds the cost of redundancy
+
+The two strategies compose naturally. A mature system uses Swiss Cheese across the DevOps loop (heterogeneous layers) and Belt & Suspenders within critical layers (redundant mechanisms at high-risk boundaries).
+
+Anti-pattern: **Suspenders on suspenders.** Adding a third redundant mechanism for the same goal rarely helps — it adds complexity without proportional risk reduction. Two independent mechanisms at a boundary is the sweet spot. Beyond that, invest in a different layer (Swiss Cheese) instead.
 
 ## Safety-I and Safety-II (Hollnagel)
 
