@@ -15,7 +15,7 @@ Based on Kenneth Reitz's "The Art of Naming Things in Code."
 
 This rule complements:
 - `for-humans` — names ARE the for-humans surface. If the name reads like intent, the API is human-first.
-- `go-best-practices` — constants over literals is a naming decision (the constant name IS the documentation).
+- `effective-go` — constants over literals is a naming decision (the constant name IS the documentation).
 - `code-smells` — bad names are a smell (Primitive Obsession, unclear intent).
 - `human-readable-output` — names for humans, codes for machines.
 

@@ -31,8 +31,8 @@ rules:
     labels: [design, architecture, process]
   - id: gherkin-specification
     labels: [testing, tdd]
-  - id: go-best-practices
-    labels: [go, code-hygiene]
+  - id: effective-go
+    labels: [go, code-hygiene, best-practices, type-safety]
   - id: hexagonal-architecture
     labels: [architecture]
   - id: human-readable-output

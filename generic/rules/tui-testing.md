@@ -162,4 +162,4 @@ if !strings.Contains(view, "⠋") { ... }
 ## Complements
 
 - `testing-methodology` — ROGYB cycle, coverage matrix, BDD
-- `go-best-practices` — table-driven tests, t.Helper()
+- `effective-go` — table-driven tests, t.Helper()
