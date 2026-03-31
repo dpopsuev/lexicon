@@ -54,16 +54,20 @@ const eventOutput = "output"
 
 ## 2. Constants over embedded literals
 
-Named constants for any string, number, or duration that appears in logic. If the same value appears twice, it needs a constant.
+Named constants for any string, number, or duration that appears in logic. If the same value appears twice, it needs a constant. Use typed constants when a named type exists.
 
 ```go
-// Good
+// Good — typed constant matches section 1
+type Role string
 const (
-    roleExecutor   = "executor"
-    defaultTimeout = 30 * time.Second
+    RoleExecutor Role = "executor"
+    RoleReviewer Role = "reviewer"
 )
 
-// Bad
+// Good — untyped when no domain type needed
+const defaultTimeout = 30 * time.Second
+
+// Bad — raw literal in logic
 if role == "executor" { ... }
 ```
 
@@ -201,8 +205,13 @@ Rules:
 - `defer mu.Unlock()` immediately after `mu.Lock()`.
 - Never hold locks across I/O, channels, or blocking calls.
 - `sync.Once` for one-time initialization.
-- Make goroutine exit conditions explicit — document when and why they terminate.
 - Buffered channels as semaphores for limiting concurrency.
+
+**Goroutine lifetime management** — a leaked goroutine is a resource leak:
+- Always document exit conditions. If you can't state when a goroutine exits, it's a bug.
+- Use `context.Context` for cancellation propagation.
+- Blocked sends/receives without a `select` + `ctx.Done()` leak on cancellation.
+- `errgroup.Group` for fan-out/fan-in with coordinated cancellation.
 
 ## 9. Resource cleanup
 
@@ -248,7 +257,53 @@ if val, ok := cache[key]; ok {
 - No naked returns except in very short functions.
 - Variadic functions: `func Min(values ...int) int`.
 
-## 12. Package design
+**Value vs pointer receivers**:
+- Value receivers: small immutable types, types that are naturally values (coordinates, colors, durations).
+- Pointer receivers: method modifies receiver, large structs, consistency within a type.
+- Don't mix on the same type without good reason — pick one and be consistent.
+- Value methods are callable on both pointer and value; pointer methods only on pointer.
+
+```go
+// Value receiver — immutable, small
+func (c Color) Hex() string { return c.hex }
+
+// Pointer receiver — modifies state
+func (r *Registry) Add(item Item) { r.items = append(r.items, item) }
+```
+
+## 12. Functional options
+
+Use the options pattern for constructors with 3+ optional parameters.
+
+```go
+type Option func(*Config)
+
+func WithTimeout(d time.Duration) Option {
+    return func(c *Config) { c.timeout = d }
+}
+
+func WithMaxRetries(n int) Option {
+    return func(c *Config) { c.maxRetries = n }
+}
+
+func New(opts ...Option) *Client {
+    cfg := defaultConfig()
+    for _, o := range opts {
+        o(&cfg)
+    }
+    return &Client{cfg: cfg}
+}
+
+// Usage
+client := New(WithTimeout(5*time.Second), WithMaxRetries(3))
+```
+
+Rules:
+- Default config should work without any options (zero-config happy path).
+- Each option is a single-responsibility function.
+- Option functions are exported; the config struct is not.
+
+## 13. Package design
 
 - Lowercase, single-word names. No underscores, no MixedCaps.
 - Package name = directory base name.
@@ -256,7 +311,79 @@ if val, ok := cache[key]; ok {
 - Avoid meaningless names: `util`, `common`, `misc`, `helpers`, `types`.
 - Initialisms: all caps or all lowercase — `URL`, `HTTPServer`, not `Url`, `HttpServer`.
 
-## 13. Structured logging (slog)
+## 14. Allocation: new vs make
+
+- `new(T)` allocates zeroed memory, returns `*T`. Rarely used directly — prefer composite literals.
+- `make(T, args)` initializes and returns T. Only for slices, maps, and channels.
+- Composite literals are idiomatic: `&File{fd: fd}` over `new(File)`.
+
+```go
+// Idiomatic
+buf := make([]byte, 0, 1024)
+cache := make(map[string]*Entry)
+ch := make(chan int, 10)
+f := &File{fd: fd, name: name}
+
+// Avoid
+p := new([]int)  // *[]int pointing to nil slice — rarely useful
+```
+
+## 15. init() functions
+
+- Use for package-level setup only: registering drivers, validating mandatory env vars, one-time computation.
+- Don't use for complex logic or anything that could fail gracefully — prefer explicit constructors.
+- Multiple `init()` per file allowed; execute in source order within a file, declaration order across files.
+- Never rely on cross-package `init()` ordering.
+- Side-effect imports (`import _ "pkg"`) trigger `init()` — use sparingly, document why.
+
+```go
+// Good — validate mandatory environment
+func init() {
+    if os.Getenv("HOME") == "" {
+        panic("$HOME not set")
+    }
+}
+
+// Bad — complex setup that should be explicit
+func init() {
+    db, _ = sql.Open("postgres", os.Getenv("DB_URL"))  // error swallowed, global state
+}
+```
+
+## 16. Panic and recover
+
+- Panic only for truly unrecoverable errors: corrupt state, programming bugs, violated invariants.
+- **Never panic across package boundaries** — convert to error at the API surface.
+- `init()` panics are acceptable for mandatory configuration.
+- Recover in deferred functions to prevent goroutine crash propagation.
+
+```go
+// Good — recover at API boundary, convert to error
+func SafeProcess(input []byte) (result string, err error) {
+    defer func() {
+        if r := recover(); r != nil {
+            err = fmt.Errorf("internal error: %v", r)
+        }
+    }()
+    return process(input), nil
+}
+
+// Good — panic for programming bug
+func MustCompile(pattern string) *Regexp {
+    re, err := Compile(pattern)
+    if err != nil {
+        panic("regexp: Compile(" + pattern + "): " + err.Error())
+    }
+    return re
+}
+```
+
+Rules:
+- `Must*` prefix signals a function that panics on error (stdlib convention).
+- Never use panic for expected errors (file not found, network timeout).
+- Server code should recover at the request boundary — one bad request shouldn't crash the process.
+
+## 17. Structured logging (slog)
 
 Use `slog` with consistent field keys as constants.
 
@@ -271,7 +398,7 @@ slog.Debug(logNodeEnter,
 - `slog.Warn` for recoverable failures.
 - `slog.Error` for unrecoverable failures.
 
-## 14. Stdlib first
+## 18. Stdlib first
 
 Before adding a dependency, check if stdlib solves it:
 - `encoding/json` not a third-party serializer.
@@ -281,7 +408,7 @@ Before adding a dependency, check if stdlib solves it:
 
 Only add deps when stdlib is genuinely insufficient. Document the decision.
 
-## 15. Testing conventions
+## 19. Testing conventions
 
 - Table-driven tests for multiple cases.
 - `testdata/` for YAML/JSON fixtures.
