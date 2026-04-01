@@ -57,6 +57,28 @@ rules:
     labels: [testing, tdd]
   - id: trust-boundaries
     labels: [security, architecture]
+  # Manufacturing principles for agentic systems
+  - id: agent-waste
+    labels: [lean, waste, agentic, quality]
+  - id: workspace-hygiene
+    labels: [5s, hygiene, workspace, agentic]
+  - id: three-stamps
+    labels: [lifecycle, stamps, quality, jidoka]
+  - id: day-0-1-2
+    labels: [architecture, tiers, standalone, mcp]
+  - id: pull-not-push
+    labels: [lean, jit, pull, agentic]
+  # Language-specific
+  - id: rust-best-practices
+    labels: [rust, code-hygiene, best-practices]
+  - id: naming
+    labels: [design, code-hygiene, conventions]
+  - id: tui-testing
+    labels: [testing, tui, bubbletea]
+  - id: service-levels
+    labels: [architecture, reliability]
+  - id: protocol-design-patterns
+    labels: [architecture, design, protocol]
   # MCP tool workflows
   - id: asterisk-workflow
     labels: [tools, mcp]
