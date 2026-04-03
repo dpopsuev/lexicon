@@ -22,7 +22,7 @@ Adapted from Toyota's 5S methodology for AI agent workspaces.
 ### 2. Set in Order (Seiton) — Organize by Convention
 - Files in correct packages per hexagonal architecture (domain/port/adapter/app)
 - Test files next to source (`*_test.go` co-located)
-- Config in standard locations (`djinn.yaml`, `~/.djinn/`)
+- Config in standard locations (project config, user config)
 - Scope types: System (persistent), Operations (ephemeral), Prototype (experimental)
 
 ### 3. Shine (Seiso) — Make Problems Visible in 5 Seconds
@@ -44,7 +44,7 @@ Adapted from Toyota's 5S methodology for AI agent workspaces.
 ### 6. Safety (6th S) — Trust Boundaries as Hazards
 - Every trust boundary is a hazard zone — mark it, gate it, test it
 - Agent cannot operate on files outside its scope (VFS containment)
-- Sandbox isolation: physical (Misbah jail) + logical (policy enforcer)
+- Sandbox isolation: physical (container/jail) + logical (policy enforcer)
 
 ## Agent Behavior
 

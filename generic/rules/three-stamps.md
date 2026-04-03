@@ -15,7 +15,7 @@ Adapted from Toyota's Jidoka principle — automation with human touch.
 
 | Stamp | Authority | Trust | Example |
 |-------|-----------|-------|---------|
-| **Deterministic** | Djinn programmatic logic | Highest | Tests pass, lint clean, build compiles, sections filled |
+| **Deterministic** | Automated system checks | Highest | Tests pass, lint clean, build compiles, sections filled |
 | **Sovereign** | Human operator | Medium | "Approved to start", "Good enough", "Skip gate" |
 | **Stochastic** | AI agent | Lowest | "I believe this is correct", "Evidence filled" |
 

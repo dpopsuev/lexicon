@@ -15,9 +15,9 @@ Adapted from Toyota's Just-in-Time and Pull System principles.
 
 | Aspect | Push (wasteful) | Pull (lean) |
 |--------|----------------|-------------|
-| **Agent spawning** | Pre-allocate 3 executors at boot | Spawn executor when task arrives (SupportScheduler) |
+| **Agent spawning** | Pre-allocate 3 executors at boot | Spawn executor when task arrives |
 | **Tool loading** | Load all MCP tools at startup | Connect MCP and load tools when first used |
-| **Context injection** | Dump entire project context into every prompt | Inject only relevant context for current task (Context Bridge) |
+| **Context injection** | Dump entire project context into every prompt | Inject only relevant context for current task |
 | **Support roles** | Always spawn inspector + auditor | Spawn support only when executor signals need |
 | **File reading** | Read all files in scope upfront | Read files on demand as agent needs them |
 | **Memory** | Carry full conversation history forever | Compact when threshold reached, keep only relevant |
@@ -27,8 +27,8 @@ Adapted from Toyota's Just-in-Time and Pull System principles.
 Taiichi Ohno observed supermarket shelves: items restocked only after customers buy them. Applied to agents:
 
 - The **executor** is the customer — it pulls work from the plan
-- The **SupportScheduler** is the restocking system — it spawns support roles when the executor signals need
-- The **MCP server** is the supplier — it connects when tools are needed, not at boot
+- The **scheduler** is the restocking system — it spawns support roles when the executor signals need
+- The **external tool server** is the supplier — it connects when tools are needed, not at boot
 - The **context** is the shelf — it holds only what's relevant, replenished on demand
 
 ## Rules
@@ -36,13 +36,13 @@ Taiichi Ohno observed supermarket shelves: items restocked only after customers 
 1. **No pre-allocation.** Don't spawn agents "just in case." Spawn when needed.
 2. **No eager loading.** Don't connect all MCPs at boot. Connect when first tool call requires it.
 3. **No speculative context.** Don't dump the entire codebase into the prompt. Inject what the current task touches.
-4. **Signal-driven.** Downstream signals upstream. Executor signals need → GenSec spawns support. Agent signals tool need → runtime connects MCP.
+4. **Signal-driven.** Downstream signals upstream. Executor signals need → supervisor spawns support. Agent signals tool need → runtime connects external service.
 
 ## Anti-Patterns
 
-- Spawning 5 support agents at E3 gear when only inspector is needed
-- Loading Scribe + Locus + Lex + Emcee MCPs when the task only needs file editing
-- Injecting all 200 Lex rules when only effective-go applies
+- Spawning 5 support agents when only 1 inspector is needed
+- Loading all external tool servers when the task only needs file editing
+- Injecting all 200 rules when only 5 apply to the current language
 - Reading all files in a package when the agent only needs one function
 
 ## Complements

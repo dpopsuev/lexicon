@@ -68,7 +68,7 @@ Design the process so mistakes are impossible, not just detectable.
 
 - Type systems over runtime checks.
 - Contract tests at port boundaries over manual integration testing.
-- Import direction enforcement (Locus) over code review comments.
+- Import direction enforcement (static analysis) over code review comments.
 - Templates with required sections over "remember to think about security."
 
 ### Heijunka (Level the Workload)

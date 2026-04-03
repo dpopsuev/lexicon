@@ -59,6 +59,10 @@ rules:
     labels: [security, architecture]
   - id: package-principles
     labels: [architecture, design, packages, SOLID]
+  - id: architecture-erosion
+    labels: [architecture, erosion, refactoring, maintenance]
+  - id: shallow-vs-deep-modules
+    labels: [architecture, design, modules, complexity]
   # Manufacturing principles for agentic systems
   - id: agent-waste
     labels: [lean, waste, agentic, quality]
