@@ -57,6 +57,8 @@ rules:
     labels: [testing, tdd]
   - id: trust-boundaries
     labels: [security, architecture]
+  - id: package-principles
+    labels: [architecture, design, packages, SOLID]
   # Manufacturing principles for agentic systems
   - id: agent-waste
     labels: [lean, waste, agentic, quality]
