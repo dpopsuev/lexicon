@@ -2,7 +2,7 @@
 id: integrate-early
 title: Integrate Early
 description: Define interfaces first, implement internals last. Wire components with stub data to crystallize contracts.
-labels: [architecture, process]
+labels: [pragmatic, architecture, process]
 ---
 
 # Integrate Early

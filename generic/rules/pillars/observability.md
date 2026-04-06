@@ -2,7 +2,7 @@
 id: observability-driven-development
 title: "Observability Driven Development"
 description: "First-class pillar alongside Testing and Security. Part of ROGYB (Orange + Yellow). If you cannot see it, you cannot fix it."
-labels: [engineering, observability, flywheel, philosophy]
+labels: [pragmatic, engineering, observability, flywheel, philosophy]
 always_apply: true
 ---
 

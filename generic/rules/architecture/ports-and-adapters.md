@@ -2,7 +2,7 @@
 id: ports-and-adapters
 title: "Ports and Adapters (Hexagonal Architecture)"
 description: "Alistair Cockburn's pattern: application equally driven by users, tests, or programs"
-labels: [architecture, hexagonal, ports-adapters]
+labels: [pragmatic, architecture, hexagonal, ports-adapters]
 ---
 
 # Ports and Adapters (Hexagonal Architecture)

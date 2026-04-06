@@ -2,7 +2,7 @@
 id: code-smells
 title: Code Smells
 description: Detect structural problems in code and apply targeted refactorings. Reference -- https://refactoring.guru/refactoring/smells
-labels: [architecture, design, refactoring]
+labels: [pragmatic, architecture, design, refactoring]
 ---
 
 # Code Smells

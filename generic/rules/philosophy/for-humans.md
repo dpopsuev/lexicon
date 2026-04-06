@@ -2,7 +2,7 @@
 id: for-humans
 title: For Humans
 description: Design interfaces, APIs, and systems from human mental models outward, not from technical constraints inward
-labels: [design, architecture, process]
+labels: [pragmatic, design, architecture, process]
 ---
 
 # For Humans

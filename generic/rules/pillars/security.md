@@ -2,7 +2,7 @@
 id: security-analysis
 title: Security Analysis
 description: OWASP Top 10 checklist applied to every feature and trust-boundary change
-labels: [security, owasp]
+labels: [pragmatic, security, owasp]
 ---
 
 # Security Analysis

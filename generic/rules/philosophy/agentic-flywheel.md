@@ -2,7 +2,7 @@
 id: agentic-flywheel
 title: Agentic Flywheel
 description: AI agent as build-and-verify operator. Micro circuit (per-change quality gates) and macro flywheel (compound DX investment where each tool makes the next tool faster).
-labels: [process, agentic]
+labels: [pragmatic, process, agentic]
 ---
 
 # Agentic Flywheel

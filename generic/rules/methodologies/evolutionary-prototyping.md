@@ -2,7 +2,7 @@
 id: evolutionary-prototyping
 title: "Evolutionary Prototyping"
 description: "Build a robust prototype that evolves into the final product"
-labels: [methodology, prototyping, evolutionary]
+labels: [pragmatic, methodology, prototyping, evolutionary]
 ---
 
 # Evolutionary Prototyping

@@ -2,7 +2,7 @@
 id: design-patterns
 title: Design Patterns
 description: Recognize problems, apply proven solutions. Reference -- https://refactoring.guru/design-patterns
-labels: [architecture, design, patterns]
+labels: [pragmatic, architecture, design, patterns]
 ---
 
 # Design Patterns

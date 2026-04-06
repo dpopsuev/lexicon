@@ -2,7 +2,7 @@
 id: testing-methodology
 title: Testing Methodology
 description: Coverage matrix, ROGYB cycle, BDD/Gherkin, security-as-test
-labels: [testing, tdd, bdd, rogyb]
+labels: [pragmatic, testing, tdd, bdd, rogyb]
 ---
 
 # Testing Methodology

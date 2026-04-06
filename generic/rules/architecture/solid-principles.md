@@ -2,7 +2,7 @@
 id: solid-principles
 title: SOLID Principles
 description: Five design constraints that prevent coupling, ensure testability, and maintain clean module boundaries.
-labels: [architecture, design, constraints]
+labels: [pragmatic, architecture, design, constraints]
 ---
 
 # SOLID Principles

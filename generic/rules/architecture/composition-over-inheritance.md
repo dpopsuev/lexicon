@@ -2,7 +2,7 @@
 id: composition-over-inheritance
 title: "Composition Over Inheritance"
 description: "Favor has-a over is-a. Compose behavior from small interfaces and embedded types instead of inheriting from deep class hierarchies."
-labels: [architecture, design, oop, composition]
+labels: [pragmatic, architecture, design, oop, composition]
 always_apply: true
 ---
 
