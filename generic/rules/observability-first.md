@@ -1,12 +1,14 @@
 ---
 id: observability-first
 title: "Observability First"
-description: "Make every decision data-driven by exposing everything during development and debugging. If you can't see it, you can't fix it."
+description: "First-class pillar alongside Testing and Security. Part of ROGYB (Orange + Yellow). If you cannot see it, you cannot fix it."
 labels: [engineering, observability, flywheel, philosophy]
 always_apply: true
 ---
 
 # Observability First
+
+**First-class pillar alongside Testing (ROGYB) and Security (STRIDE). Not a phase. Not optional. Part of every code increment — Orange instruments failures, Yellow instruments success.**
 
 **Every decision must be data-driven. Every system must be observable by default. If you can't measure it, you can't improve it.**
 
