@@ -1,47 +1,69 @@
 ---
 id: lex-workflow
-title: Lex Rule Resolution Workflow
-description: How AI agents use Lex MCP for prompt enrichment and rule resolution
+title: "Lex Rule Resolution Workflow"
+description: "How to use Lex MCP for rule resolution, label-based filtering, and lexicon management"
 labels: [planning, process, agentic]
 includes_labels: [pragmatic]
 ---
 
 # Lex Rule Resolution Workflow
 
-Lex is a prompt enrichment engine available as an MCP sidecar. It reads rules from multiple sources (.cursor/rules, CLAUDE.md, AGENTS.md, remote repos) and merges them using priority-based cascading with context-aware scoring.
+Lex is a rule resolution engine. Two MCP tools: `lexicon`, `config`.
 
-## Tools
+## Tool: lexicon
 
-### `lexicon` — Rule resolution and management
-
-| Action | Purpose | Key params |
-|--------|---------|------------|
-| `resolve` | Get context-aware rules | language, files, keywords, labels |
+| Action | What | Key params |
+|--------|------|------------|
+| `resolve` | Get context-aware rules | language, files, keywords, labels, budget |
 | `search` | Find rules by substring | query |
-| `inspect` | List all rules/skills from sources | type (rules/skills/all) |
-| `add` | Register a remote lexicon repo | url, ref, priority |
-| `remove` | Delete a registered source | url |
-| `enable` / `disable` | Toggle a source | url |
-| `sync` | Re-fetch all remote repos | — |
+| `inspect` | List all rules/skills | type (rules/skills/all) |
+| `add` | Register remote lexicon | url, ref, priority |
+| `remove` | Unregister source | url |
+| `enable` / `disable` | Toggle source | url |
+| `sync` | Re-fetch all remotes | — |
 | `list` | Show registered sources | — |
 
-### `config` — Settings management
+## Tool: config
 
-| Action | Purpose | Key params |
-|--------|---------|------------|
-| `get` | Return current config | — |
-| `set` | Update a setting | key, value |
+| Action | What | Key params |
+|--------|------|------------|
+| `get` | Current config | — |
+| `set` | Update setting | key, value |
+
+## Label System
+
+Labels are the primary query mechanism:
+
+```
+resolve labels=["pragmatic"]     → 13 core engineering rules
+resolve labels=["planning"]      → pragmatic + Scribe/Lex/Locus workflows
+resolve labels=["testing"]       → ROGYB, coverage matrix, BDD, TUI testing
+```
+
+**Nested labels:** Rules can declare `includes_labels` in frontmatter. Resolving `planning` expands to include all `pragmatic` rules automatically.
+
+**`always_apply`:** Rules with this flag appear in every resolve call.
+
+## Context-Aware Resolution
+
+Pass context for relevance scoring:
+
+```
+resolve language=go keywords=["testing","refactoring"] files=["auth/middleware.go"]
+```
+
+The scorer ranks rules by:
+1. File glob match (+10 per match)
+2. Language match (+5)
+3. Keyword match (+3 per match)
+4. Always-apply (+1)
+5. Priority weight (0-100 scale)
 
 ## Workflow
 
-1. `lexicon action=resolve language=go files=["main.go"]` — get relevant rules for current context
-2. `lexicon action=inspect type=rules` — see all available rules across sources
-3. `lexicon action=search query="security"` — find rules by keyword
-4. `lexicon action=sync` — re-fetch remote repos after changes
-
-## Priority Model
-
-- Local workspace rules: priority 100 (always win)
-- Remote lexicons: configurable priority (default 25)
-- Duplicates by name: highest priority wins
-- Context scoring: file globs, language, keywords boost relevance
+```
+1. resolve labels=["planning"] → get pragmatic rules + tool workflows
+2. resolve language=go keywords=[...] → get context-specific rules
+3. search query="composition" → find specific rules by keyword
+4. sync → refresh after lexicon repo changes
+```

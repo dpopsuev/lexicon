@@ -1,39 +1,74 @@
 ---
 id: scribe-workflow
-title: Scribe Workflow
-description: How AI agents use Scribe MCP for goal tracking, artifact lifecycle, and cross-scope awareness
+title: "Scribe Workflow"
+description: "How to use Scribe MCP for artifact management: create, query, graph, admin"
 labels: [planning, tools, mcp, process]
 includes_labels: [pragmatic]
 ---
 
 # Scribe Workflow
 
-Scribe is an artifact store available as an MCP sidecar. Use it to stay oriented, track work, and manage artifacts.
+Scribe is a work graph for AI agents with native DAG support. Three MCP tools: `artifact`, `graph`, `admin`.
 
 ## Session Start
 
-1. Call `motd` or `get_current_goal` to read the north star for this workspace's scope.
-2. Call `list_artifacts` with `kind=contract` to see active and draft contracts. This tells you what work is in flight and what's next.
-3. If a sprint is active, call `contract_tree` on its ID to see the full board.
+1. `admin action=motd` — session context (active goals, warnings, domain docs)
+2. `artifact action=list kind=task status=active` — what's in flight
+3. `graph action=topo_sort id=<goal>` — execution order
 
-## Before Making Changes
+## Tool: artifact
 
-- Call `get_next_contract` to find the highest-priority unblocked contract.
+CRUD + sections on work artifacts (task, spec, goal, bug, campaign, need, doc, ref, template, decision, config).
 
-## During Work
+| Action | What | Key params |
+|--------|------|------------|
+| `create` | New artifact | kind, title, scope, parent, priority, sections, depends_on |
+| `batch_create` | Multiple at once | artifacts (array) |
+| `get` | Fetch by ID | id (or ids for bulk), include_edges, section_filter |
+| `list` | Query/filter | kind, scope, status, parent, labels, query (FTS), sort, group_by, limit |
+| `set` | Update one field | id (or ids), field, value |
+| `update` | Multi-field update | id, patch (map) |
+| `archive` | Mark read-only | id (or ids), cascade |
+| `attach_section` | Add text block | id, name, text |
+| `get_section` | Read text block | id, name |
+| `detach_section` | Remove text block | id, name |
 
-- Update contract status as you progress: `set_field` to move draft -> active -> complete.
-- For bulk status changes, use `batch_update_status` with a list of IDs.
-- Attach architecture diagrams, design notes, or mermaid charts to contracts via `attach_section`. Retrieve them later with `get_section`.
+## Tool: graph
 
-## Creating Artifacts
+Navigate and modify artifact relationships.
 
-- Use `create_artifact` for new specs, tasks, bugs, sprints, goals, or any artifact kind.
-- The `scope` field defaults to the workspace's home scope. Override explicitly for cross-project artifacts.
-- Use `parent` to build hierarchies (sprint -> contracts, contract -> sub-tasks).
-- Use `depends_on` to declare sequencing between contracts.
+| Action | What | Key params |
+|--------|------|------------|
+| `tree` | Parent-child hierarchy | id, depth, relation, direction |
+| `briefing` | Recursive ALL edges | id |
+| `topo_sort` | Dependency order | id |
+| `link` | Add edge | id, relation, targets |
+| `unlink` | Remove edge | id, relation, targets |
+| `bulk_link` | Batch edges | edges (array of {from, relation, to}) |
+| `move` | Re-parent | id, target |
+| `replace` | Swap edge target | id, relation, old_target, target |
 
-## Cross-Scope Awareness
+**Relations:** parent_of, depends_on, follows, justifies, implements, documents, satisfies
 
-- `list_artifacts` defaults to the home scope (auto-detected from the workspace). To see artifacts from other projects, pass an explicit `scope`.
-- `get_artifact` by ID works across all scopes regardless of the current workspace.
+## Tool: admin
+
+| Action | What |
+|--------|------|
+| `motd` | Session context — active goals, warnings |
+| `dashboard` | Storage, staleness, health |
+| `vacuum` | Delete old archived artifacts |
+| `lint` | Validate schema consistency |
+| `check` | Conformance check (orphans, overlaps) |
+| `snapshot` | Create/list/diff/restore snapshots |
+
+## Workflow
+
+```
+1. motd → understand scope and active work
+2. list → find relevant artifacts
+3. get → read spec acceptance criteria
+4. create → file tasks with sections (context, checklist, acceptance)
+5. link → wire depends_on and implements edges
+6. set status → track progress (draft → active → complete)
+7. tree/topo_sort → verify DAG structure
+```

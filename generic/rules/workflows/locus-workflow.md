@@ -1,28 +1,91 @@
 ---
 id: locus-workflow
-title: Locus Architecture Workflow
-description: How AI agents use Locus MCP for spatial context, architecture scanning, and design decisions
+title: "Locus Architecture Workflow"
+description: "How to use Locus MCP for architecture scanning, dependency analysis, and drift detection"
 labels: [planning, tools, mcp, architecture]
 includes_labels: [pragmatic]
 ---
 
 # Locus Architecture Workflow
 
-Locus is a spatial context bus available as an MCP sidecar. Use it to understand codebase structure before making design decisions.
+Locus is a codebase intelligence engine. Three MCP tools: `codograph`, `analysis`, `render_diagram`.
 
-## Before Making Changes
+## Tool: codograph
 
-- For high-level design decisions, call `scan_project` to get the current architecture as a codograph (mermaid, JSON, or markdown). This surfaces coupling hotspots, god components, and dependency structure without reading every file.
+Scan and compare repository architectures. Results cached by git HEAD SHA.
 
-## Architecture Tools
+| Action | What | Key params |
+|--------|------|------------|
+| `scan_local` | Scan local repo | path, intent (architecture/coupling/health/full) |
+| `scan_remote` | Scan GitHub repo | url, ref |
+| `set_desired_state` | Persist architecture rules | path, layers |
+| `get_desired_state` | Read saved rules | path |
+| `status` | Cache status | path |
+| `diff` | Compare two scans | branch_a, branch_b |
+| `history` | Past scans | path, last |
 
-- `scan_project` -- full codograph of a repository (packages, imports, symbols, LOC, churn). Results are cached by git HEAD SHA.
-- `get_hot_spots` -- identify high-risk components (high fan-in + high churn).
-- `get_coupling_table` -- fan-in, fan-out, and metrics per component.
-- `get_dependencies` -- fan-in and fan-out edges for a specific component.
-- `diff_branches` -- structural diff between two git branches (cache-aware: repeated scans are instant).
-- `diff_codographs` -- compare the latest two scans for a repo.
-- `get_codograph_history` -- past scans and inter-session diffs.
-- `architecture_evolution` -- scan architecture at multiple commits to visualize structural growth over time.
-- `render_diagram` -- generate mermaid diagrams (dependency, C4, coupling, churn, layers, tree, classes, sequence, ER, dataflow, callgraph, state).
-- `triage` -- map a natural language intent to ranked Locus tools.
+## Tool: analysis
+
+Core dependency and architecture analysis.
+
+| Action | What | Key params |
+|--------|------|------------|
+| `deps` | Fan-in/fan-out for a component | path, component |
+| `impact` | What breaks if this changes | path, component |
+| `coupling` | Coupling metrics | path, view (hot_spots/edges), churn_days |
+| `cycles` | Dependency cycles | path |
+| `violations` | Layer violations | path |
+| `drift` | Desired vs actual state | path |
+| `component` | Deep dive on one component | path, component |
+| `search` | Find by keyword | path, query |
+| `preset` | Pre-built analysis | path, preset (architecture_review/health_check/pre_pr) |
+| `solid_scan` | SOLID compliance | path |
+| `callers` | Who calls this symbol | path, symbol |
+
+## Tool: render_diagram
+
+Generate Mermaid diagrams.
+
+| Type | What |
+|------|------|
+| `dependency` | Package dependency graph |
+| `c4` | C4 context diagram |
+| `coupling` | Coupling heat map |
+| `layers` | Layer architecture |
+| `tree` | Directory tree |
+| `classes` | Type/interface diagram |
+| `hexa` | Hexagonal architecture validation |
+| `zones` | Zone overview |
+
+## Workflow
+
+```
+1. codograph scan_local → cache the repo (returns cache_key)
+2. analysis preset=architecture_review → quick health check
+3. analysis cycles → verify 0 cycles
+4. analysis drift → compare against desired state
+5. analysis coupling view=hot_spots → identify risky components
+6. render_diagram type=dependency → visualize structure
+
+After changes:
+7. codograph scan_local → re-scan (new SHA invalidates cache)
+8. analysis drift → verify no new violations
+9. analysis cycles → verify still 0 cycles
+```
+
+## Key Presets
+
+| Preset | What it does |
+|--------|-------------|
+| `architecture_review` | Components, edges, cycles, hot spots — one call |
+| `health_check` | Coverage, complexity, churn — code health |
+| `pre_pr` | Quick diff-based check before PR |
+
+## Desired State
+
+Set architectural rules that drift detection validates against:
+
+```
+codograph set_desired_state path=/workspace layers=["cmd", "app", "domain", "infra"]
+analysis drift → reports violations against these layers
+```
