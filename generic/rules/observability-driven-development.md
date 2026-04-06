@@ -1,12 +1,12 @@
 ---
-id: observability-first
-title: "Observability First"
+id: observability-driven-development
+title: "Observability Driven Development"
 description: "First-class pillar alongside Testing and Security. Part of ROGYB (Orange + Yellow). If you cannot see it, you cannot fix it."
 labels: [engineering, observability, flywheel, philosophy]
 always_apply: true
 ---
 
-# Observability First
+# Observability Driven Development
 
 **First-class pillar alongside Testing (ROGYB) and Security (STRIDE). Not a phase. Not optional. Part of every code increment — Orange instruments failures, Yellow instruments success.**
 
