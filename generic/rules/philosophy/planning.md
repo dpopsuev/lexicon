@@ -2,7 +2,7 @@
 id: planning
 title: "Planning Label — Pragmatic Rules + Tool Workflow"
 description: "Meta-label: includes all pragmatic rules plus Scribe/Lex/Locus workflow. Resolve with labels=[planning] to get the full planning context."
-labels: [planning, meta]
+labels: [planning, pragmatic, meta]
 includes_labels: [pragmatic]
 always_apply: true
 ---
