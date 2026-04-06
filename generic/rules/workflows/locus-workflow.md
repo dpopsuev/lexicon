@@ -2,7 +2,8 @@
 id: locus-workflow
 title: Locus Architecture Workflow
 description: How AI agents use Locus MCP for spatial context, architecture scanning, and design decisions
-labels: [tools, mcp, architecture]
+labels: [planning, tools, mcp, architecture]
+includes_labels: [pragmatic]
 ---
 
 # Locus Architecture Workflow

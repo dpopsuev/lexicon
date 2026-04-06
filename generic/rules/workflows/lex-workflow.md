@@ -2,7 +2,8 @@
 id: lex-workflow
 title: Lex Rule Resolution Workflow
 description: How AI agents use Lex MCP for prompt enrichment and rule resolution
-labels: [process, agentic]
+labels: [planning, process, agentic]
+includes_labels: [pragmatic]
 ---
 
 # Lex Rule Resolution Workflow
