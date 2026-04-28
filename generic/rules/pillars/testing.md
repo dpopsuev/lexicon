@@ -21,6 +21,8 @@ Before writing or modifying production code, verify that each applicable layer h
 | **E2E** | Full pipeline validation | End-to-end flow from input to output; stub and real scenarios |
 | **Concurrency** | Shared state and parallel paths | Race detectors, deadlock-free synchronization |
 | **Security** | Trust boundaries and external data | OWASP checklist, input validation |
+| **Robustness** | Survival under adverse conditions | Tamper detection, lease expiry, load (1000+), crash recovery, restart persistence |
+| **Chaos** | Deliberate failure injection in multi-component systems | Kill agents mid-reaction, partition networks, drop storage mid-write (Netflix Simian Army prior art) |
 
 ## Development cycle: Red-Orange-Green-Yellow-Blue
 
