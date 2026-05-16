@@ -23,11 +23,3 @@ labels: [manufacturing, tps, lean, safety]
 | Linter | golangci-lint catches errors before commit |
 | Build tags | `//go:build e2e` prevents accidental test execution |
 | Uniform tool absence | Agent can't call tools not in its schema |
-
-## Djinn Alignment
-
-- Uniform = poka-yoke (tools that don't exist can't be called)
-- Mirage = poka-yoke (files outside overlay can't be modified)
-- depguard = poka-yoke (forbidden imports caught at lint time)
-
-**Reference:** https://en.wikipedia.org/wiki/Poka-yoke

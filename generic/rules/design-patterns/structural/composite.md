@@ -27,7 +27,7 @@ labels: [design-patterns, structural]
 **Go notes:**
 - Define interface with shared methods
 - Composite has `Children() []Component`
-- Djinn's `core.Panel` is a Composite
+- A UI panel tree where each panel can contain sub-panels is a Composite
 
 **Related:** Builder, Iterator, Visitor, Decorator
 

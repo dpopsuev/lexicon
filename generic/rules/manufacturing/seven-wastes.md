@@ -11,7 +11,7 @@ labels: [manufacturing, lean, waste, tps]
 
 ## Manufacturing → Software
 
-| # | Manufacturing | Software | Djinn Detection |
+| # | Manufacturing | Software | Agent Detection |
 |---|---|---|---|
 | 1 | **Overproduction** | Extra features nobody asked for | WasteClassifier: overproduction |
 | 2 | **Waiting** | Waiting for decisions, reviews, builds | WasteClassifier: waiting |
@@ -23,6 +23,6 @@ labels: [manufacturing, lean, waste, tps]
 
 ## The 8th Waste
 
-Some add an 8th: **unused talent** — not leveraging team expertise. In Djinn: not using the right agent for the job (executor doing auditor's work).
+Some add an 8th: **unused talent** — not leveraging team expertise. In agentic systems: not using the right agent for the job (executor doing auditor's work).
 
 **Reference:** https://en.wikipedia.org/wiki/Muda_(Japanese_term)

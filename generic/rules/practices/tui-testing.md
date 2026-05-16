@@ -59,7 +59,7 @@ if !strings.Contains(view, "___") {
 }
 
 // GOOD — asserts logo constant is used
-if !strings.Contains(view, tui.DjinnLogo[:10]) {
+if !strings.Contains(view, tui.AppLogo[:10]) {
     t.Fatal("should render the logo")
 }
 ```

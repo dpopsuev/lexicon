@@ -21,10 +21,4 @@ labels: [practice, xp, collaboration]
 - **Traditional** — same room, same screen
 - **Remote** — screen sharing, voice chat
 - **Mob programming** — whole team, one screen
-- **AI pair programming** — human + AI agent (what Djinn enables)
-
-## Djinn Alignment
-
-Djinn IS pair programming with an AI agent. The operator is the navigator (intent, review, HITL). The agent is the driver (coding, testing). The Reconciliation Circuit is the rotation mechanism.
-
-**Reference:** https://en.wikipedia.org/wiki/Pair_programming
+- **AI pair programming** — human + AI agent. The operator is the navigator (intent, review, approval). The agent is the driver (coding, testing).

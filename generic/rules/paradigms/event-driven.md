@@ -25,12 +25,3 @@ labels: [paradigm, event-driven, architecture]
 | **Event Sourcing** | Store events, derive state |
 | **CQRS** | Separate read and write models |
 | **Observer** | Object notifies dependents of state change |
-
-## Djinn Alignment
-
-- `event/` package — EventSink/EventSource interfaces
-- `telemetry/` signals — event-driven health monitoring
-- `terminal.ViewEvent` — TUI subscribes to agent events
-- Reconciliation Circuit — event-driven control loop
-
-**Reference:** https://en.wikipedia.org/wiki/Event-driven_programming

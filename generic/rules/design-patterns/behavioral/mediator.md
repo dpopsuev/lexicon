@@ -26,7 +26,7 @@ labels: [design-patterns, behavioral]
 
 **Go notes:**
 - Event bus pattern: components emit events, mediator routes
-- Djinn's signal bus is a mediator
+- An event/signal bus that decouples publishers from subscribers is a Mediator
 
 **Related:** Chain of Responsibility, Command, Facade, Observer
 

@@ -30,11 +30,3 @@ labels: [methodology, agile, lean, manufacturing]
 | Waiting | Waiting (for decisions, reviews, builds) |
 | Motion | Handoffs between teams |
 | Defects | Bugs, rework |
-
-## Djinn Alignment
-
-- Eliminate waste → WasteClassifier (7 Lean wastes)
-- Amplify learning → Reconciliation Circuit (observe → reconcile → re-plan)
-- Decide as late as possible → Planning Pyramid (narrow search space per layer)
-
-**Reference:** https://en.wikipedia.org/wiki/Lean_software_development

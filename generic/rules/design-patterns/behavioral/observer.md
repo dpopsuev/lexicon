@@ -27,7 +27,7 @@ labels: [design-patterns, behavioral]
 **Go notes:**
 - Use channels: `Subscribe() <-chan Event`
 - Or callbacks: `OnEvent(func(Event))`
-- Djinn's terminal.ViewEvent + Subscribe is Observer
+- A UI event system with ViewEvent + Subscribe is Observer
 
 **Related:** Chain of Responsibility, Command, Mediator
 

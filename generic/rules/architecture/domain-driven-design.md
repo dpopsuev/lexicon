@@ -28,12 +28,3 @@ labels: [architecture, ddd, design]
 | **Repository** | Abstraction for retrieving domain objects from storage. |
 | **Domain Event** | Something that happened that domain experts care about. |
 | **Domain Service** | Operation that doesn't belong to any entity. |
-
-## Djinn Alignment
-
-- Parchment Artifact = Entity (has ID, lifecycle)
-- Parchment Store = Repository
-- Parchment Schema = domain rules as code
-- Bounded Contexts: Djinn (harness), Scribe (tracking), Lex (rules)
-
-**Reference:** https://en.wikipedia.org/wiki/Domain-driven_design

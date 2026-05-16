@@ -24,7 +24,7 @@ labels: [design-patterns, structural]
 - Facade becomes a god object
 
 **Go notes:**
-- Djinn's `terminal.Terminal` is a Facade (Controller + Viewer + Lifecycle)
+- A `Terminal` class that unifies Controller + Viewer + Lifecycle behind one surface is a Facade
 - Keep facade thin — delegate, don't implement
 
 **Related:** Adapter, Mediator, Singleton

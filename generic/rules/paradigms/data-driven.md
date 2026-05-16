@@ -24,14 +24,6 @@ labels: [paradigm, data-driven, design]
 - Testing: swap config, not code
 - A/B testing: different configs, same code
 
-## Djinn Alignment
-
-- Parchment Schema = data-driven artifact validation
-- Uniform = data-driven tool selection (YAML config)
-- Shell presets = data-driven tool sets
-- Ordo rules = data-driven convention enforcement
-- staff.yaml = data-driven role definitions
-
 ## Anti-Patterns
 
 - Over-engineering: making everything configurable when it never changes

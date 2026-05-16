@@ -39,6 +39,8 @@ rules:
     labels: [conventions, output]
   - id: integrate-early
     labels: [process]
+  - id: walking-skeleton
+    labels: [architecture, process, incremental, agile]
   - id: off-the-shelf-modules
     labels: [architecture]
   - id: operational-quality

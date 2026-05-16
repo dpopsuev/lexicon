@@ -23,11 +23,3 @@ Reactive systems are:
 2. **Resilient** — stay responsive in the face of failure
 3. **Elastic** — stay responsive under varying workload
 4. **Message Driven** — rely on asynchronous message passing
-
-## Djinn Alignment
-
-- Signal bus = reactive stream of health signals
-- Reconciliation Circuit = reactive loop (observe → react → observe)
-- Roadmap Tree = reactive view of plan DAG changes
-
-**Reference:** https://en.wikipedia.org/wiki/Reactive_programming

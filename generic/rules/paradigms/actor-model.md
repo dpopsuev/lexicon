@@ -22,15 +22,8 @@ labels: [paradigm, concurrent, actor, distributed]
 - Fault tolerance — supervisor hierarchies (Erlang/OTP)
 - Concurrency — millions of lightweight actors
 
-## Djinn Alignment
-
-- Troupe Actor = the actor model (Perform receives messages, produces responses)
-- GenSec spawns child actors (2Sec, Executor)
-- Agents communicate through Substrate (message bus), not shared state
-- Each agent processes one intent at a time
-
 ## Implementations
 
-- Erlang/OTP (original), Akka (JVM), Orleans (.NET), Troupe (Go/Djinn)
+- Erlang/OTP (original), Akka (JVM), Orleans (.NET), Pykka (Python)
 
 **Reference:** https://en.wikipedia.org/wiki/Actor_model

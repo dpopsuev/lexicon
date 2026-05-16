@@ -16,11 +16,11 @@ labels: [manufacturing, tps, lean, observability]
 - Supervisor responds immediately
 - Line stops until problem is resolved
 
-## In Software (Djinn)
+## In Software (AI Agents)
 
-- signal.Bus emits signals with levels (Green/Yellow/Red/Black)
+- An event bus emits signals with levels (Green/Yellow/Red/Black)
 - Watchdogs detect anomalies (budget exceeded, deadlock, stuck agent)
-- TUI dashboard shows signal status
+- A dashboard shows signal status
 - Operator can cordon (stop work in a scope)
 
 ## Key Principle

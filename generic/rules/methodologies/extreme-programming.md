@@ -25,12 +25,3 @@ labels: [methodology, agile, xp]
 | **Planning Game** | Customers estimate value, developers estimate effort |
 | **On-Site Customer** | Customer representative works with the team daily |
 | **System Metaphor** | Shared terminology for the system's design |
-
-## Djinn Alignment
-
-- TDD → ROGYB cycle (Red first, always)
-- Simple Design → "don't add features beyond what was asked"
-- Refactoring → continuous, not a phase
-- Small Releases → each step is dogfood-testable
-
-**Reference:** https://en.wikipedia.org/wiki/Extreme_programming

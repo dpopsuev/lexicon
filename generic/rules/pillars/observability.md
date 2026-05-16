@@ -73,14 +73,6 @@ Observe → Measure → Decide → Act → Observe (feedback loop)
 
 Without observation, the flywheel has no feedback. Without feedback, no improvement. Without improvement, no compounding. The flywheel stops.
 
-## Djinn Alignment
-
-- **telemetry/** — trace, signal, watchdog, slog (the observation layer)
-- **Reconciliation Circuit** — Observe phase reads from telemetry
-- **WasteClassifier** — classifies tool calls by Lean waste type (data-driven waste detection)
-- **Scoring** — burndown is observable convergence (data-driven progress)
-- **HITL** — operator sees data, makes decisions (not blind approval)
-
 ## Complements
 
 - `testing-methodology` — ROGYB: Orange (problem signals) + Yellow (success signals)

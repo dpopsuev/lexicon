@@ -23,9 +23,3 @@ labels: [pragmatic, methodology, prototyping, evolutionary]
 | Prototype becomes the product | Prototype is discarded |
 | Production-quality code from start | Quick-and-dirty code |
 | Iterative refinement | Validate then rebuild |
-
-## Djinn Alignment
-
-Djinn's dogfooding approach IS evolutionary prototyping — the PoC evolves into the MVP evolves into v0.1.0. Same codebase, refined iteratively.
-
-**Reference:** https://en.wikipedia.org/wiki/Software_prototyping#Evolutionary_prototyping

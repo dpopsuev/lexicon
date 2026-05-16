@@ -31,9 +31,3 @@ labels: [manufacturing, tps, lean, philosophy]
 - **Muda** — waste (7 types)
 - **Mura** — unevenness (inconsistency)
 - **Muri** — overburden (stress on people/machines)
-
-## Djinn Alignment
-
-CLAUDE.md explicitly lists TPS influences: JIT (spawn on demand), Jidoka (stop on defect), Andon (signal bus), Kanban (artifact lifecycle), Kaizen (flywheel), Gemba (CellSight), Nemawashi (proposal loop).
-
-**Reference:** https://en.wikipedia.org/wiki/Toyota_Production_System

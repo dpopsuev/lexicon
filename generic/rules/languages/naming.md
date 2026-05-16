@@ -89,7 +89,7 @@ Good metaphors in our codebase:
 
 Bad metaphors we avoided:
 - "Pipeline" — implies linear flow. Circuits have loops and branches.
-- "Container" — overloaded (Docker, DI, etc.). We use "shell" for Djinn.
+- "Container" — overloaded (Docker, DI, containers). Prefer specific: "sandbox", "enclosure", "shell".
 
 ## Rules
 

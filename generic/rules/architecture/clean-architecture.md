@@ -23,11 +23,3 @@ Nothing in an inner circle can know about anything in an outer circle. The name 
 ## Relationship to Hexagonal
 
 Clean Architecture and Hexagonal Architecture solve the same problem. Hexagonal uses ports/adapters vocabulary. Clean Architecture uses layers/dependency-rule vocabulary. Both arrive at: domain at center, infrastructure at edges, dependencies point inward.
-
-## Djinn Alignment
-
-- Parchment (domain) has zero transport imports — Clean Architecture compliant
-- Djinn imports libraries inward (Parchment, Ordo, Oculus, Troupe, Mirage)
-- depguard lint rule enforces dependency direction
-
-**Reference:** Robert C. Martin, "Clean Architecture" (2017)

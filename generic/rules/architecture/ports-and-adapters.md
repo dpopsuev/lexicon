@@ -28,12 +28,3 @@ Multiple adapters per port. A port might have: a human UI adapter, a REST API ad
 ## The Symmetry Insight
 
 The key insight is symmetry: the application doesn't care if it's driven by a human or a test. The functional specification is made against the hexagon's interface, not against any external technology.
-
-## Djinn Alignment
-
-- Mirage is an adapter (overlay, Kata, K8s sandbox behind same Space interface)
-- Troupe is an adapter (ACP, HTTP, mock behind same Driver interface)
-- Parchment is an adapter (SQLite, Memory behind same Store interface)
-
-**Reference:** https://alistair.cockburn.us/hexagonal-architecture/
-**Book:** Alistair Cockburn & Juan Manuel Garrido de Paz (2024)

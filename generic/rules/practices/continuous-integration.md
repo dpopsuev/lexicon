@@ -19,11 +19,3 @@ labels: [practice, xp, ci, devops]
 6. Fix broken builds immediately
 7. Keep the build fast
 8. Test in a production-like environment
-
-## Djinn Alignment
-
-- Mirage Diff → Commit is a CI step (changes verified before promotion)
-- HITL gate ensures human review before mainline merge
-- Agentic Flywheel micro-circuit: Build → Lint → Test → Integration
-
-**Reference:** https://en.wikipedia.org/wiki/Continuous_integration

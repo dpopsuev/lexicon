@@ -16,7 +16,7 @@ A trust boundary exists wherever:
 - Two components run with different privileges (user vs admin, agent vs host)
 - Data crosses a network (MCP call, HTTP request, Unix socket)
 - A process talks to an external system (database, API, LLM)
-- Configuration changes the behavior of a downstream component (Djinnfile, env vars)
+- Configuration changes the behavior of a downstream component (config files, env vars)
 - A less-trusted component's output becomes a more-trusted component's input
 
 If you can't draw the boundary on a diagram, you don't understand the system.
