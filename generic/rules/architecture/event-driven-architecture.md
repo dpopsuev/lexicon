@@ -41,10 +41,8 @@ Events carry the full state needed by consumers, not just a notification. Consum
 
 ## Relationship to Other Patterns
 
-- **Sensory-Motor Bus** — the buses ARE event channels. Sensory = inbound events. Motor = outbound commands. EDA applied to agent internals.
 - **Hexagonal Architecture** — event bus = port. Producers/consumers = adapters. Domain reacts to events through ports.
 - **Observer Pattern** — pub-sub is the architectural scale of observer.
-- **ACT-R Buffers** — cognitive architecture's version of event-driven: modules write to buffers, production system reads. Async, decoupled.
 - **Ablation Testing** — event-driven systems are naturally ablation-ready. Unsubscribe a consumer = disable a component.
 
 ## Application to Agent Systems
@@ -53,16 +51,12 @@ For AI agent architectures, EDA maps naturally:
 
 | Agent Concept | EDA Pattern |
 |---------------|-------------|
-| Sensory input | Events published by Organs to Sensory Bus |
-| Motor output | Commands published by Cerebrum to Motor Bus |
-| Molecule | Event-sourced state (atoms are append-only events) |
-| Reactor | Event consumer that processes and produces events |
-| Shelf.Watch | Event subscription (artifact arrival) |
-| Instrument execution | Command event → result event |
-| Session lifecycle | Event chain: Watch → work → drain → Push → Watch |
-| Inter-agent communication | Events between agent buses via broker |
-
-The Molecule IS event-sourced: atoms are append-only, never modified. Current state = the graph of all atoms. Replay the atoms to reconstruct any prior state.
+| External input (user, sensor, API) | Event published to inbound channel |
+| Agent decision / action | Command event published to outbound channel |
+| Tool execution | Command event → result event |
+| Agent state | Event-sourced: replay events to reconstruct any prior state |
+| Component disable | Unsubscribe consumer from channel |
+| Inter-agent communication | Events routed between agent buses via broker |
 
 ## Anti-patterns
 

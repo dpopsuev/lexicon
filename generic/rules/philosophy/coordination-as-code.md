@@ -26,12 +26,12 @@ Every coordination artifact that lives in conversation must be codified into a m
 | Conversational | Codified |
 |---------------|----------|
 | "We decided in the meeting to..." | Spec with decision section, rationale, alternatives considered |
-| "Ask Sarah, she knows how that works" | Architecture in Locus, decisions in Scribe, rules in Lex |
-| "We always do it this way here" | Lex rule with `always_apply` |
-| "Can you review my PR for X?" | Template with required checklist, mechanical verification via Locus/Limes |
+| "Ask Sarah, she knows how that works" | Architecture in a queryable tool, decisions in a work tracker, conventions in a rule registry |
+| "We always do it this way here" | Rule with `always_apply` in a shared rule system |
+| "Can you review my PR for X?" | Template with required checklist, mechanical verification via analysis tools |
 | "Team B needs to expose an API for us" | Contract test at port boundary -- machine-verified compatibility |
 | "Is this safe to deploy?" | Operational readiness checklist, blast radius analysis, gate validation |
-| "What's the status of the project?" | Work graph in Scribe -- queryable, not narrated |
+| "What's the status of the project?" | Work graph in a queryable tracker -- queryable, not narrated |
 
 ## The Constraint Funnel
 
@@ -58,11 +58,11 @@ The Inverse Conway Maneuver: deliberately codify your coordination to get the ar
 ## Rules
 
 1. **Decisions go in specs, not meetings.** If a decision was made, it has a spec with a decision section. If there's no spec, the decision doesn't exist.
-2. **Conventions go in rules, not heads.** If "we always do X," write a Lex rule. If there's no rule, the convention doesn't exist.
-3. **Architecture goes in code, not wikis.** Locus scans the actual code. Architecture diagrams that drift from reality are worse than no diagrams.
+2. **Conventions go in rules, not heads.** If "we always do X," write a rule. If there's no rule, the convention doesn't exist.
+3. **Architecture goes in code, not wikis.** Architecture analysis tools scan the actual code. Diagrams that drift from reality are worse than no diagrams.
 4. **Contracts go in tests, not Slack.** If two components must agree on an interface, there's a contract test. If there's no test, there's no contract.
-5. **Status goes in the work graph, not standups.** Scribe artifacts have status fields. Query them, don't narrate them.
-6. **Quality goes in gates, not reviews.** Templates force required analysis. Locus and Limes mechanically verify. The membrane doesn't negotiate.
+5. **Status goes in the work graph, not standups.** Work tracker artifacts have status fields. Query them, don't narrate them.
+6. **Quality goes in gates, not reviews.** Templates force required analysis. Analysis tools mechanically verify. The membrane doesn't negotiate.
 
 ## Anti-Patterns
 

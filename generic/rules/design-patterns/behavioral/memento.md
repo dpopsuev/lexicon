@@ -27,7 +27,7 @@ labels: [design-patterns, behavioral]
 
 **Go notes:**
 - Memento as a private struct with exported Save/Restore methods
-- Mirage's Diff/Commit/Reset is a memento pattern
+- Diff/Commit/Reset workflows (e.g. overlay filesystems, undo stacks) are the memento pattern
 
 **Related:** Command, Iterator, Prototype
 

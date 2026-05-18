@@ -42,10 +42,10 @@ Input → [Filter A] → pipe → [Filter B] → pipe → [Filter C] → Output
 
 **Key property:** Filters are unaware of each other. Adding, removing, or reordering filters requires no changes to the filters — only the pipe wiring changes.
 
-**In agent systems:** Each processing component (organ, module, handler) is a filter. The event type IS the pipe. Composing different processing pipelines means changing which event type each component subscribes/publishes to — not changing the components themselves.
+**In event-driven systems:** Each processing component (handler, module, processor) is a filter. The event/message type IS the pipe. Composing different processing pipelines means changing which message type each component subscribes/publishes to — not changing the components themselves.
 
 ```
-sense/user-input → [Planner] → motor/task → [Executor] → sense/result
+input-channel → [Classifier] → task-channel → [Executor] → result-channel
 ```
 
 **Anti-pattern:** Filters that import each other directly. Bypass the pipes and you lose composability.

@@ -29,34 +29,21 @@ Multiple adapters per port. A port might have: a human UI adapter, a REST API ad
 
 The key insight is symmetry: the application doesn't care if it's driven by a human or a test. The functional specification is made against the hexagon's interface, not against any external technology.
 
-## Applied to Event-Driven Agent Systems
+## Applied to Event-Driven Systems
 
-In an AI agent built on an event bus, hexagonal architecture maps cleanly:
+In a system built on an event bus, hexagonal architecture maps cleanly:
 
 ```
-[Human / stdin]           [LLM provider / API]
-      │                           │
- Primary Adapter           Application Core         Secondary Adapters
- (translates input   →  [LLMOrgan: reasoning] → (translate commands to
-  into primary port)     subscribes primary port   secondary port calls)
-                         publishes secondary ports
-                                  │
-               ┌──────────────────┼──────────────────┐
-               ↓                  ↓                   ↓
-         motor/fs.*          motor/shell.*        motor/web.*
-              │                   │                   │
-         [FsOrgan]          [ShellOrgan]          [WebOrgan]
-        (secondary          (secondary             (secondary
-         adapter)            adapter)               adapter)
-              │                   │                   │
-        [filesystem]          [shell]              [internet]
+[Primary Driver]            Application Core           [Secondary Driven]
+ (user, test,     →  (depends only on port    →  (database, API, shell,
+  API client)          interfaces, no adapters)    filesystem, LLM)
 ```
 
 **Port cardinality rules:**
-- **Primary reasoning port** (`sense/dialog.message`) — required, exactly one adapter (the reasoning organ)
-- **Secondary ports** (`motor/fs.*`, `motor/shell.*`) — optional, at most one adapter each
-- Multiple adapters on a secondary port = undefined behaviour (PortRegistry warns)
+- **Primary driving port** — required; exactly one adapter per port (driving actor)
+- **Secondary driven ports** — optional; at most one adapter each (driven actor)
+- Multiple adapters on the same port = race condition or undefined routing
 
-**PortRegistry** — validates at boot that all required ports have exactly one adapter plugged in. If the reasoning port has zero adapters, the agent cannot respond. If it has two, they race.
+**Boot validation** — a registry validates at startup that all required ports have exactly one adapter plugged in. Zero adapters = the application cannot respond. Two adapters = they race.
 
-This is the hexagonal contract: the application core depends on ports (abstractions), never on concrete adapters (organs).
+This is the hexagonal contract: the application core depends on ports (abstractions), never on concrete adapters (infrastructure).
