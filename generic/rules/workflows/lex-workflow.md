@@ -36,7 +36,7 @@ Labels are the primary query mechanism:
 
 ```
 resolve labels=["pragmatic"]     → 13 core engineering rules
-resolve labels=["planning"]      → pragmatic + Scribe/Lex/Locus workflows
+resolve labels=["planning"]      → pragmatic + work-tracking/Lex/Locus workflows
 resolve labels=["testing"]       → ROGYB, coverage matrix, BDD, TUI testing
 ```
 

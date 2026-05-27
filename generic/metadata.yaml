@@ -100,7 +100,7 @@ rules:
     labels: [tools, mcp, architecture]
   - id: locus-workflow
     labels: [tools, mcp, architecture]
-  - id: scribe-workflow
+  - id: work-tracking-workflow
     labels: [tools, mcp, process]
   - id: tubus-workflow
     labels: [tools, mcp]
