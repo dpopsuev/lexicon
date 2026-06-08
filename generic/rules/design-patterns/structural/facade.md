@@ -24,7 +24,7 @@ labels: [design-patterns, structural]
 - Facade becomes a god object
 
 **Go notes:**
-- A `Terminal` class that unifies Controller + Viewer + Lifecycle behind one surface is a Facade
+- A `Client` struct that unifies connection, auth, and retry behind one surface is a Facade
 - Keep facade thin — delegate, don't implement
 
 **Related:** Adapter, Mediator, Singleton

@@ -32,10 +32,10 @@ A double cast (`as unknown as T`) tells the compiler to forget what it knows. It
 
 ```typescript
 // Bad — hiding a type mismatch
-const messages = turnsToMessages(turns) as unknown as Message[];
+const items = adaptItems(rawItems) as unknown as Item[];
 
 // Good — fix the mismatch at the source
-// ConversationMessage should extend or alias Message, not be a separate type
+// RawItem should extend or alias Item, not be a separate incompatible type
 ```
 
 Treatment:
@@ -99,10 +99,10 @@ Signal: if the same narrowing pattern appears more than three times, extract it.
 
 ```typescript
 // Suppresses lint, swallows errors
-void this.store.append(record);
+void this.db.write(record);
 
 // Better — explicit fire-and-forget with error logging
-this.store.append(record).catch((err) => log.warn({ err }, "append failed"));
+this.db.write(record).catch((err) => log.warn({ err }, "write failed"));
 ```
 
 Rules:
@@ -162,15 +162,15 @@ Rules:
 When two types represent the same concept but are declared separately, casts accumulate. Align them at the declaration site.
 
 ```typescript
-// Bad — ConversationMessage and Message describe the same shape,
+// Bad — InternalItem and ExternalItem describe the same shape,
 // forcing casts everywhere they interact
-interface ConversationMessage { role: "user" | "assistant" | "system"; content: string; }
-type Message = { role: string; content: unknown; ... }; // from external lib
+interface InternalItem { id: string; name: string; }
+type ExternalItem = { id: string; label: unknown; }; // from library
 
-const projected = turnsToMessages(turns) as unknown as Message[]; // required every time
+const projected = adaptItems(items) as unknown as ExternalItem[]; // required every time
 
-// Good — make ConversationMessage satisfy Message structurally,
-// or use Message directly, or use a shared base type
+// Good — make InternalItem satisfy ExternalItem structurally,
+// or use ExternalItem directly, or use a shared base type
 ```
 
 Rule: if you find yourself writing `as unknown as ExternalType` to bridge two internal types, one of the types is wrong. Fix the type, not the cast.

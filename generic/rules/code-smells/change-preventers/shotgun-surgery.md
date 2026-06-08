@@ -19,9 +19,9 @@ labels: [code-smells, change-preventers]
 - Move Field — co-locate related data
 - Inline Class — merge overly-split classes
 
-**Detection (Go):**
-- git diff shows 5+ files changed for a single feature
-- Locus `analysis coupling view=hot_spots` shows high fan-out
+**Detection:**
+- `git diff` shows 5+ files changed for a single logical change
+- Architecture coupling analysis shows high fan-out from the changed component
 
 **SOLID violation:** SRP — responsibility is scattered instead of cohesive
 

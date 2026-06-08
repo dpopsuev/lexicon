@@ -26,32 +26,26 @@ Adapted from Toyota's 5S methodology for AI agent workspaces.
 - Scope types: System (persistent), Operations (ephemeral), Prototype (experimental)
 
 ### 3. Shine (Seiso) — Make Problems Visible in 5 Seconds
-- Architecture health scan on scope entry — cycles, violations, hot spots
-- Any newcomer to the workspace should spot problems within 5 seconds of looking at the health report
-- Dashboard shows: build status, test status, lint status, architecture score
+
+Run a build, lint, and test pass when entering an unfamiliar codebase. Any new contributor should be able to identify failing checks within 5 seconds of reading the CI output. A codebase where "build is red but that's normal" has failed this step.
 
 ### 4. Standardize (Seiketsu) — Make Hygiene Routine
-- Built-in checklists enforced via GateResolver — not optional, not "should"
-- Language-specific rules applied automatically (Go → effective-go checklist)
-- Every commit passes lint. Every task has acceptance criteria. Every trust boundary has a security assessment.
+
+Hygiene rules are enforced by tooling, not by convention. Every commit passes lint. Every task has acceptance criteria before work starts. Every trust boundary has at least one negative test. "Should" is not enforcement.
 
 ### 5. Sustain (Shitsuke) — Embed Through Discipline
-- Flywheel: each iteration improves the workspace
-- Drift detection: desired state vs actual state, checked every sprint
-- Retrospective: architecture scores before/after each sprint
-- No regression: new code cannot introduce violations that didn't exist before
+
+Hygiene degrades without active maintenance. Check drift — desired state vs actual state — at the start of each sprint. Architecture scores, test coverage, and dead code metrics should trend in one direction: better.
 
 ### 6. Safety (6th S) — Trust Boundaries as Hazards
-- Every trust boundary is a hazard zone — mark it, gate it, test it
-- Agent cannot operate on files outside its scope (VFS containment)
-- Sandbox isolation: physical (container/jail) + logical (policy enforcer)
+
+Every trust boundary is a hazard zone. Mark it, gate it, test it. External input, inter-service calls, and file I/O are trust boundaries. Internal function calls within a single process are not.
 
 ## Agent Behavior
 
-- On scope entry: run health scan (built-in arch tool)
-- On scope exit: verify no new violations introduced
-- Between tasks: clean up temporary files, close unused resources
-- On idle: report workspace health to dashboard
+- Enter a codebase: run build, lint, test before making changes
+- Exit a task: verify no new lint violations or failing tests
+- Between tasks: delete temporary files, close resources, clean up generated artifacts
 
 ## Complements
 

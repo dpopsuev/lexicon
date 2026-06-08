@@ -110,17 +110,6 @@ Ask one question: **"What is the Subject Under Test?"**
 **The one rule:** Mock when the dependency is **not** what you are testing.
 Use real when the dependency **is** what you are testing.
 
-### Applied to pivi
-
-| Test scenario | Subject | Dependency | Right tier |
-|---|---|---|---|
-| Extension injects context into Pi conversation | TypeScript hook logic | `nvim.client.lua()` return value | Unit — mock lua() |
-| CONTEXT_CHUNK Lua runs and returns cursor+tick | Lua plugin behavior | Neovim Lua runtime | Contract — real Neovim |
-| changedtick dedup skips re-inject when tick unchanged | TypeScript cache logic | `nvim.client.lua()` tick value | Unit — mock two calls |
-| nvim_buf_attach delivers lines events | Neovim push protocol | Neovim msgpack-RPC | Contract — real Neovim |
-| pivi socket protocol ping/pong roundtrip | JSON wire seam | Real socket, mock Pi | Contract — real socket |
-| 3 agents coordinate on shared Neovim | Full multi-agent system | Real LLM, real Neovim | E2E (gated) |
-
 ### Anti-patterns to reject on sight
 
 - Using real Neovim to test TypeScript string parsing (parseContext, replaceContextMsg).

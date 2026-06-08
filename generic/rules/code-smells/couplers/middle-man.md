@@ -19,9 +19,9 @@ labels: [code-smells, couplers]
 - Inline Class — merge into the delegate
 - Replace Delegation with Inheritance — if a true is-a relationship exists
 
-**Detection (Go):**
-- Type where >50% of methods are `func (m *Mid) X() { m.inner.X() }`
-- `jerichoport/` was a middle man before deletion
+**Detection:**
+- Type where >50% of methods are one-line delegations: `func (m *Mid) X() { m.inner.X() }`
+- Removing the type and calling the delegate directly would change no behavior
 
 **SOLID violation:** N/A — but often created by over-application of Hide Delegate
 

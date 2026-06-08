@@ -21,7 +21,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from sibel.event_bus import Event
+from myapp.events import Event
 ```
 
 ```python
@@ -39,7 +39,7 @@ def process(data: str) -> None:
 ```python
 # Good — optional dependency with explicit comment
 def _build_openai_model(spec: str) -> object:
-    # Inline: langchain-openai is optional; not installed in Vertex environments.
+    # Inline: this dependency is optional and not installed in all environments.
     from langchain_openai import ChatOpenAI
     return ChatOpenAI(model=spec)
 ```
@@ -327,7 +327,7 @@ f-strings (PEP 498, Python 3.6+) are faster, more readable, and catch name error
 
 ```python
 # Good
-name = "sibel"
+name = "worker"
 msg = f"agent {name!r} started in {cwd}"
 
 # Bad

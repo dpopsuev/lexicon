@@ -27,7 +27,7 @@ labels: [design-patterns, structural]
 
 **Go notes:**
 - Middleware pattern: `func(next Handler) Handler`
-- Tool Envelope (Gate/Enrich/Execute/Record) is a decorator chain
+- Request pipelines (auth → log → rate-limit → handle) are decorator chains
 
 **Related:** Adapter, Proxy, Chain of Responsibility
 

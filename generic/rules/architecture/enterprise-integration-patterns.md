@@ -101,7 +101,7 @@ Separate command channels from event channels. Commands are directed. Events are
 
 **In practice:** Events flow back from workers to orchestrators. Event = past tense ("file was read", "command exited", "error occurred"). The receiver decides what action to take based on the event content.
 
-**The Command/Event split in two-bus architectures:** One bus carries commands (Motor/inbound), the other carries events (Sense/outbound). This makes the direction semantically explicit and prevents feedback loops.
+**The Command/Event split in two-bus architectures:** One bus carries commands (inbound), the other carries events (outbound). This makes the direction semantically explicit and prevents feedback loops.
 
 ---
 
@@ -201,17 +201,6 @@ Message Store          ← the audit trail
 
 ---
 
-## What EIP Does NOT Cover
-
-EIP was designed for enterprise data integration (2003). Three gaps that matter for AI agent systems:
-
-1. **Context Window Management** — no pattern for managing a bounded in-memory context with cost-based eviction (token budget, hotness scoring).
-2. **Seam Cardinality** — EIP assumes N subscribers on a pub-sub channel. AI agents need exactly-one semantic on certain channels (only one component may respond to a user request).
-3. **Token Budget** — no concept of message cost. Agent systems must track token consumption per message and across the full context.
-
-These gaps are addressed by patterns specific to agent architectures built on top of the EIP foundation.
-
----
 
 ## References
 

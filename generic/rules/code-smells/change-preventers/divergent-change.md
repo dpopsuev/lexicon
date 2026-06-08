@@ -19,9 +19,10 @@ labels: [code-smells, change-preventers]
 - Extract Module — split into focused packages
 - Move Method — relocate methods to their proper home
 
-**Detection (Go):**
+**Detection:**
 - One file modified in >50% of recent commits for different reasons
-- Locus churn + fan-in both high on same component
+- Architecture analysis shows high churn and high fan-in on the same component
+- `git log --oneline -- <file>` reveals commits with unrelated subject lines
 
 **SOLID violation:** SRP — multiple reasons to change
 

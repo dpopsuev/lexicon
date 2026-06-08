@@ -60,17 +60,4 @@ Industry-standard vocabulary for polygon and volume meshes. Use these terms in c
 - Use **surface mesh** not "2D mesh" or "shell mesh" for face-only meshes.
 - Qualify "triangle" always: "GPU triangle" (rendering), "Delaunay triangle" (tessellation), "face" (mesh element).
 
-## Hegemony Domain Mapping
 
-These domain terms are Hegemony-specific and layer on top of industry mesh vocabulary:
-
-| Domain Term | Definition | Mesh Equivalent |
-|------------|-----------|-----------------|
-| **Tile** | Gameplay atom. Hexagonal or pentagonal region at one layer in a column. | Collection of cells at one layer |
-| **Column** | Vertical stack of tiles at one globe position. | Column of cells along radial axis |
-| **Layer** | Horizontal classification: Ground (always), Water (optional), Subsurface (future). | Subset of cells at same radial depth |
-
-Domain terms describe gameplay semantics. Industry terms describe geometry. Both vocabularies coexist:
-- "A tile is composed of 6 prism cells" (domain + industry)
-- "Each cell has 5 faces: 2 triangular end-faces and 3 quadrilateral side-faces" (pure industry)
-- "The water layer sits above the ground layer in each column" (pure domain)

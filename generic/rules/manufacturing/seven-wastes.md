@@ -11,15 +11,15 @@ labels: [manufacturing, lean, waste, tps]
 
 ## Manufacturing → Software
 
-| # | Manufacturing | Software | Agent Detection |
-|---|---|---|---|
-| 1 | **Overproduction** | Extra features nobody asked for | WasteClassifier: overproduction |
-| 2 | **Waiting** | Waiting for decisions, reviews, builds | WasteClassifier: waiting |
-| 3 | **Transportation** | Unnecessary data movement, handoffs | WasteClassifier: transportation |
-| 4 | **Over-processing** | Gold plating, unnecessary abstraction | WasteClassifier: over-processing |
-| 5 | **Inventory** | Partially done work, branches not merged | WasteClassifier: inventory |
-| 6 | **Motion** | Context switching, unrelated file edits | WasteClassifier: motion |
-| 7 | **Defects** | Bugs, rework, wrong assumptions | WasteClassifier: defects |
+| # | Manufacturing | Software equivalent |
+|---|---|---|
+| 1 | **Overproduction** | Extra features nobody asked for; code written speculatively |
+| 2 | **Waiting** | Waiting for decisions, reviews, CI builds, deploy approvals |
+| 3 | **Transportation** | Unnecessary data handoffs, serialization/deserialization across unnecessary boundaries |
+| 4 | **Over-processing** | Gold plating, unnecessary abstraction, re-implementing what stdlib provides |
+| 5 | **Inventory** | Partially done work, stale branches not merged, untriaged bug backlogs |
+| 6 | **Motion** | Context switching, touching files unrelated to the current task |
+| 7 | **Defects** | Bugs shipped, rework, wrong assumptions baked in early |
 
 ## The 8th Waste
 

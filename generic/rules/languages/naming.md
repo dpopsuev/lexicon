@@ -82,14 +82,9 @@ Ask: will this name still make sense when the implementation changes? If not, yo
 
 Choose metaphors deliberately. Test them: does this metaphor help or hinder the *next* feature?
 
-Good metaphors in our codebase:
-- **Circuit** — nodes, edges, walks. Scales to delegation, loops, shortcuts.
-- **Heraldic naming** — "Denim Writer of Indigo Refactor." Scales to 56 agents.
-- **Papercup** — lightweight, disposable coordination. Communicates the right weight.
+Test a metaphor by asking: does it make the *next* feature name obvious? "Walker" makes `walker.enter()`, `walker.exit()`, `walker.traverse()` natural. "Processor" makes nothing obvious.
 
-Bad metaphors we avoided:
-- "Pipeline" — implies linear flow. Circuits have loops and branches.
-- "Container" — overloaded (Docker, DI, containers). Prefer specific: "sandbox", "enclosure", "shell".
+Overloaded words to avoid: "Manager", "Handler", "Service", "Processor", "Helper", "Util", "Controller" — these names have no semantic content. Name the specific responsibility instead.
 
 ## Rules
 

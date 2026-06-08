@@ -26,7 +26,7 @@ labels: [design-patterns, behavioral]
 
 **Go notes:**
 - Middleware chains: `func(next http.Handler) http.Handler`
-- Tool Envelope gates are a chain of responsibility
+- Validation pipelines (auth check → rate limit → business logic) are chains of responsibility
 
 **Related:** Command, Mediator, Observer, Decorator
 

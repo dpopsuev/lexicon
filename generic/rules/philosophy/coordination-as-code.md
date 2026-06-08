@@ -74,8 +74,7 @@ The Inverse Conway Maneuver: deliberately codify your coordination to get the ar
 
 ## Complements
 
-- `integrate-early` -- codify interfaces before implementing internals
-- `hexagonal-architecture` -- ports and adapters ARE codified boundaries
-- `testing-methodology` -- tests ARE codified expectations
-- `work-graph` -- the work graph IS codified coordination (see your team's work tracking tool)
-- `trust-boundaries` -- trust boundaries ARE codified security contracts
+- `integrate-early` — codify interfaces before implementing internals
+- `ports-and-adapters` — ports and adapters ARE codified boundaries
+- `testing-methodology` — tests ARE codified expectations
+- `trust-boundaries` — trust boundaries ARE codified security contracts

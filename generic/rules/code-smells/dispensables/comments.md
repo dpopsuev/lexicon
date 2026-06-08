@@ -22,20 +22,20 @@ labels: [code-smells, dispensables]
 
 **Non-obvious WHY** — something the reader cannot deduce from the code and the surrounding context.
 
-```ts
-// gaxios throws "request to URL failed" for OAuth token fetch failures —
-// these are retryable network errors, not permanent auth failures.
-return /request to.*failed/.test(err);
+```python
+# urllib raises ECONNRESET for OAuth token fetch failures on broken pipes —
+# these are retryable network errors, not permanent auth failures.
+return "connection reset" in str(err).lower()
 ```
 
-That is legitimate. The regex pattern alone doesn't explain the domain reason.
+Legitimate — the error type alone doesn't explain the domain reason.
 
-```ts
-// waitForReady() polls getState() until !isStreaming
-await this.rpcClient.waitForReady();
+```python
+# wait until the stream has finished before reading the result
+await self.client.wait_for_ready()
 ```
 
-That is not. The method name already says it.
+Not legitimate — the method name already says it.
 
 ## AI-specific pitfalls
 
@@ -44,7 +44,7 @@ AI agents over-comment by default. Specific patterns to reject on sight:
 | Pattern | Example | Correct action |
 |---------|---------|---------------|
 | **Decision lore** | `// Using RPC over json mode because json blocks on piped stdin` | Delete. Put in commit message or ADR. |
-| **Upstream ticket reference** | `// Replace with X once pi-mono#4744 merges` | Delete. The ticket tracks it. |
+| **Upstream ticket reference** | `// Replace with X once issue #4744 merges` | Delete. The ticket tracks it. |
 | **Alternative comparison** | `// Unlike waitForIdle(), this doesn't need a prompt` | Delete. Rename the method if the distinction matters. |
 | **Future state** | `// This is a workaround until the async factory lands` | Delete. The code either works or it doesn't. |
 | **What-comment** | `// Resolve agent definition` above `resolveInstanceConfig(...)` | Delete. The call site is self-explanatory. |

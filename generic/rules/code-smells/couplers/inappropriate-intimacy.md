@@ -19,9 +19,9 @@ labels: [code-smells, couplers]
 - Extract Class — create a shared dependency both import
 - Replace Inheritance with Delegation — break embedding coupling
 
-**Detection (Go):**
-- Locus `analysis cycles` detects circular imports
-- `depguard` enforces import direction
+**Detection:**
+- Import cycle analysis (e.g. `go build ./...`, `deptrac`, `depcheck`) reveals circular dependencies
+- Two packages that always change together in the same commit
 
 **SOLID violation:** DIP — both depend on each other instead of abstractions
 
