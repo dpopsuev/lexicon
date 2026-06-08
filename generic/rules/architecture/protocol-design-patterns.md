@@ -76,6 +76,57 @@ Prior art: Hegelian dialectic, XP pair programming, debate systems.
 | **Arbiter** | Two agents disagree, need a tiebreaker | Third agent judges arguments from both sides, issues verdict (affirm, amend, remand). |
 | **DialecticPair** | Need both debate AND paired execution | Phase 1: dialectic convergence on plan. Phase 2: driver implements, navigator reviews per tool call. Same two agents, different hats. |
 
+## Durable Streaming
+
+Prior art: EIP Durable Subscriber (Hohpe & Woolf 2003), WHATWG HTML spec §9.2, Kafka consumer offsets, NATS JetStream.
+
+**The problem this section solves:** A fast producer (LLM generating tokens) and an unreliable consumer connection (high latency, low bandwidth, mobile). The producer cannot slow down. The consumer cannot be guaranteed to receive every byte. A server-side buffer absorbs the mismatch and enables resume on reconnect.
+
+| Pattern | Problem | Solution | Prior Art |
+|---|---|---|---|
+| **Store and Forward** | Consumer is unreliable or intermittently offline | Server stores produced items in a durable log; forwards when consumer is reachable | Telecom SMS/SMSC, email relay (SMTP), IETF Delay-Tolerant Networking RFC 4838 |
+| **Consumer Offset** | Consumer reconnects after a gap; needs to resume without restarting from zero | Each item in the log carries a monotonic offset. Consumer persists its last-acked offset. On reconnect, consumer provides offset; server replays from that position. | Kafka `committed offset`, NATS JetStream `DeliverLastMsg` |
+| **Resumable SSE** | HTTP streaming breaks on TCP disconnect; reconnecting restarts delivery from token 0 | SSE server tags each event with `id: {offset}`. Client stores last seen ID. On reconnect, client sends `Last-Event-ID: N`. Server replays from N+1. | WHATWG HTML Living Standard §9.2.3–9.2.4 |
+| **Demand-Driven Delivery** | Server cannot push faster than consumer can process | Consumer signals how many items it can accept (`request(n)`). Server sends at most that many. Queues are bounded. | Reactive Streams specification (2014), Java `Subscription.request(n)` |
+
+**Composite: Durable Streaming** = Store and Forward + Consumer Offset + Resumable SSE.
+The canonical NATS term is **temporal decoupling** — publisher and subscriber operate independently in time. The canonical Kafka term is **pull-based consumption with offset tracking**.
+
+### Resumable SSE — implementation sketch
+
+```python
+# Server side (router/proxy)
+_event_log: dict[str, deque] = {}           # request_id → deque[bytes]
+
+# On each upstream token:
+offset = len(_event_log[request_id])
+frame = f"id: {offset}\ndata: {chunk}\n\n".encode()
+_event_log[request_id].append(frame)
+yield frame                                  # stream to client
+
+# On reconnect (client sends Last-Event-ID header):
+last_id = int(request.headers.get("last-event-id", -1))
+log = _event_log.get(request_id, [])
+for i, frame in enumerate(log):
+    if i > last_id:
+        yield frame                          # replay missed events
+```
+
+```python
+# Client side (sdk/client.py)
+last_event_id = -1
+
+# On each received SSE event:
+if event.id:
+    last_event_id = int(event.id)
+
+# On httpx.RequestError (network drop):
+headers["Last-Event-ID"] = str(last_event_id)
+# reconnect with updated header → server replays from last_event_id + 1
+```
+
+**The LLMPort facade is unchanged.** `Agent.stream() → Generator[str, None, None]` is unaffected. Reconnect is transparent at the HTTP transport layer.
+
 ## Anti-Patterns
 
 - **Hub without health.** Central coordinator routes work to dead agents because it doesn't check readiness.
@@ -87,7 +138,7 @@ Prior art: Hegelian dialectic, XP pair programming, debate systems.
 
 ## References
 
-- Hohpe & Woolf, [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/) (2003)
+- Hohpe & Woolf, [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/) (2003) — Durable Subscriber, Guaranteed Delivery, Message Store
 - [Erlang/OTP Supervisor Behaviour](https://www.erlang.org/doc/system/sup_princ.html)
 - Grassé, "La reconstruction du nid et les coordinations interindividuelles" (1959) — [Stigmergy](https://en.wikipedia.org/wiki/Stigmergy)
 - [NIST SP 800-207 Zero Trust Architecture](https://nvlpubs.nist.gov/nistpubs/specialpublications/NIST.SP.800-207.pdf)
@@ -102,4 +153,6 @@ Prior art: Hegelian dialectic, XP pair programming, debate systems.
 - `effective-go` — type safety for protocol types (named types over raw strings).
 - `trust-boundaries` — STRIDE analysis at protocol boundaries.
 - `defense-in-depth` — layered defenses across protocol layers.
+- `enterprise-integration-patterns` — Durable Subscriber, Guaranteed Delivery, Message Store.
+- `reactive-programming` — Reactive Streams backpressure; demand-driven delivery mechanics.
 - `code-smells` — smells that signal missing protocol patterns.

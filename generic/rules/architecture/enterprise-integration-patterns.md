@@ -172,6 +172,36 @@ Inline error signalling (error flag on the reply message) is simpler than a sepa
 
 ---
 
+### Durable Subscriber
+
+**Problem:** A subscriber misses messages while disconnected from a Publish-Subscribe Channel.
+
+**Solution:** The messaging system saves messages published during the subscriber's absence and delivers them when the subscriber reconnects. Temporal decoupling — publisher and subscriber operate independently in time.
+
+**Three implementation variants:**
+
+| Variant | Mechanism | Example |
+|---|---|---|
+| **Broker-side log** | Broker persists events; consumer tracks offset | Kafka committed offset |
+| **Push queue** | System queues for named subscriber; delivers on reconnect | NATS JetStream durable consumer |
+| **Resumable SSE** | Server tags each event `id: {offset}`; client reconnects with `Last-Event-ID: N` | WHATWG HTML spec §9.2.3 |
+
+Message Store is the implementation mechanism; Durable Subscriber is the pattern that uses it on reconnect. Store-and-Forward (telecom) is the generalisation: intermediate node stores and forwards when destination is reachable.
+
+**Reference:** https://www.enterpriseintegrationpatterns.com/patterns/messaging/DurableSubscription.html
+
+---
+
+### Guaranteed Delivery
+
+**Problem:** A message must reach its destination even if the sender or network fails mid-send.
+
+**Solution:** Persist the message to a local store before sending. A background process drains the store with retry. The message survives sender crashes. This is the **Outbox Pattern** in microservices.
+
+**Reference:** https://www.enterpriseintegrationpatterns.com/patterns/messaging/GuaranteedMessaging.html
+
+---
+
 ### Content-Based Router
 
 **Problem:** Route a message to the appropriate processor based on message content.
@@ -197,6 +227,8 @@ Command Message + Event Message   ← the two semantic roles of messages
 
 Dead Letter Channel    ← what happens to unprocessable messages
 Message Store          ← the audit trail
+  └─ Durable Subscriber ← Message Store + reconnect semantics
+       └─ Guaranteed Delivery ← Message Store + retry until delivered
 ```
 
 ---
