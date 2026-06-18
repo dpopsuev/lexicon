@@ -47,3 +47,9 @@ In a system built on an event bus, hexagonal architecture maps cleanly:
 **Boot validation** — a registry validates at startup that all required ports have exactly one adapter plugged in. Zero adapters = the application cannot respond. Two adapters = they race.
 
 This is the hexagonal contract: the application core depends on ports (abstractions), never on concrete adapters (infrastructure).
+
+## Complements
+
+- `domain-driven-design` — DDD provides the content of the center: aggregates, value objects, domain services, repositories as port interfaces. Hexagonal provides the structure around it.
+- `domain-centric-design` — the synthesis of hexagonal, DDD, and BDD as a coherent system
+- `gherkin-specification` — BDD scenarios are specifications for port behavior; hexagonal enables testing them without infrastructure

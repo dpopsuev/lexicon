@@ -79,6 +79,10 @@ rules:
   # Language-specific
   - id: rust-best-practices
     labels: [rust, code-hygiene, best-practices]
+  - id: kde-qt-style
+    labels: [kde, qt, cpp, code-hygiene, best-practices, conventions, contribution]
+  - id: cpp-qt-footguns
+    labels: [cpp, qt, kde, safety, code-hygiene, footguns, undefined-behavior]
   - id: naming
     labels: [design, code-hygiene, conventions]
   - id: tui-testing

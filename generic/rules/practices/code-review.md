@@ -55,6 +55,24 @@ Distinguish blocking issues from suggestions. Use explicit markers if your team 
 - [ ] Is the error path handled at every boundary?
 - [ ] Is there code outside the task scope that belongs in a separate PR?
 
+## Reading order
+
+No single canonical order exists. The most defensible approach: **read tests first to understand intent, then implementation.**
+
+1. PR description -- what problem, what approach
+2. Tests -- what behavior is expected
+3. Data model changes -- structs, types
+4. Primitives -- new functions the rest depends on
+5. Population/wiring -- how data flows into the system
+6. Dispatch/integration layer -- how paths are unified
+7. Small additions (constants, log helpers)
+8. Vendored dependencies -- verify, do not read in detail
+
+**Sources:**
+- Google Engineering Practices: https://google.github.io/eng-practices/review/reviewer/ -- what to look for, not file order; does say "understand the purpose first"
+- Palantir code review guide -- emphasis on understanding intent before implementation
+- Accelerate (Forsgren, Humble, Kim) -- code review as an organizational practice, not mechanics
+
 ## Complements
 
 - `testing-methodology` — tests are not optional; the review checks they exist

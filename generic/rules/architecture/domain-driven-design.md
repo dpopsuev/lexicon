@@ -28,3 +28,9 @@ labels: [architecture, ddd, design]
 | **Repository** | Abstraction for retrieving domain objects from storage. |
 | **Domain Event** | Something that happened that domain experts care about. |
 | **Domain Service** | Operation that doesn't belong to any entity. |
+
+## Complements
+
+- `ports-and-adapters` — hexagonal is how you implement DDD correctly: Repositories become ports, infrastructure becomes adapters, Anti-Corruption Layers become adapters translating foreign models
+- `domain-centric-design` — the synthesis of DDD, hexagonal, and BDD as a coherent system
+- `gherkin-specification` — BDD's ubiquitous language in scenarios is the same as DDD's ubiquitous language in the domain model; Given/When/Then maps to aggregate precondition/command/event
